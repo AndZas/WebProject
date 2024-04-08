@@ -1,0 +1,284 @@
+body {
+    background-color: #f5f5f5;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: large;
+    line-height: 30px;
+    width: 1450px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h1 {
+    font-size: 120%;
+    color: #333333;
+}
+
+h2 {
+    font-size: 110%;
+}
+
+nav {
+    background-color: #4a463b;
+    margin: 10px 10px 0 10px;
+}
+
+nav ul {
+    margin: 0;
+    list-style-type: none;
+    padding: 5px 0 5px 0;
+}
+
+nav ul li {
+    display: inline-flex;
+    padding: 5px 10px 5px 10px;
+}
+
+nav ul li a:link, nav ul li a:visited {
+    color: white;
+    font-weight: bold;
+    border-bottom: none
+}
+
+nav ul li a:hover {
+    color: #e9c28b;
+}
+
+div#map {
+    display: table-cell;
+    padding: 15px;
+    width: 400px;
+    height: 400px;
+    border: 1px solid black;
+}
+
+div.Row_info {
+    background: white;
+    padding: 15px;
+    border-bottom: thin solid rgb(217, 217, 217);
+}
+
+div#info_geolocation {
+    display: table-cell;
+    width: 1000px;
+}
+
+div#Order_coffee {
+    width: 1450px;
+    margin-left: auto;
+    margin-right: auto;
+    display: table-cell;
+    background: white;
+    font-size: 105%;
+    padding: 15px;
+    text-align: center;
+}
+
+table#пропорции_для_кофе_таблица {
+    margin-left: 20px;
+    margin-right: 20px;
+    border: thin solid black;
+    border-collapse: collapse;
+}
+
+section#main, section#blog {
+    display: table-cell;
+    background: white;
+    font-size: 105%;
+    padding: 15px;
+    vertical-align: top;
+}
+
+section#drinks {
+    display: table-cell;
+    background-color: white;
+    width: 20%;
+    padding: 15px;
+    vertical-align: top;
+}
+
+aside.right_column {
+    display: table-cell;
+    background: white;
+    font-size: 105%;
+    padding: 15px;
+    vertical-align: top;
+    width: 25%
+}
+
+div.tableContainer {
+    display: table;
+    border-spacing: 10px;
+}
+
+div.tableRow {
+    display: table-row;
+}
+
+/*div.test {*/
+/*    display: inline-block;*/
+/*    position: relative;*/
+/*}*/
+
+/*.test {*/
+/*    background: white;*/
+/*    font-size: large;*/
+/*    text-align: center;*/
+/*    vertical-align: top;*/
+/*    width: 440px;*/
+/*    height: 400px;*/
+/*    padding: 15px;*/
+/*}*/
+
+/*.table_cell {*/
+/*    display: table-cell;*/
+/*}*/
+
+/*.red_string {*/
+/*    margin: 0;*/
+/*    position: absolute;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    background-color: rgba(0, 0, 0, .5);*/
+/*    font-size: 23px;*/
+/*    text-align: center;*/
+/*    width: 470px;*/
+/*    height: 215px;*/
+/*    color: #fff;*/
+/*    padding: 215px 0 0;*/
+/*    opacity: 0;*/
+/*    transform: scale(0);*/
+/*    -webkit-transition: all .45s;*/
+/*    -o-transition: all .45s;*/
+/*    transition: all .45s;*/
+/*}*/
+
+/*div.test:hover .red_string {*/
+/*    opacity: 1;*/
+/*    top: 0;*/
+/*    transform: scale(1);*/
+/*}*/
+
+.section_рецепт_кофе {
+    display: table-cell;
+    background: white;
+    padding: 15px;
+    vertical-align: top;
+}
+
+.h1_name_of_coffee {
+    font-size: 200%;
+    color: black;
+    text-decoration: underline;
+    text-align: center;
+}
+
+.pos_photo_of_coffe {
+    float: right;
+    padding-left: 15px;
+}
+
+.table_propor {
+    padding-left: 38px;
+}
+
+p#для_одной_чашки_тоже {
+    font-weight: bold;
+}
+
+a:link, a:visited {
+    color: #333333;
+    text-decoration: none;
+}
+
+a.red_string {
+    color: #ffffff;
+}
+
+a#эспрессо_link_from_table {
+    color: #888;
+    text-decoration: underline;
+}
+
+a#do_order {
+    border: 1px solid black;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: #e9c28b;
+}
+
+.big_text {
+    font-weight: bold;
+    font-size: 180%;
+}
+
+.slogan {
+    color: #954b4b;
+}
+
+.beanheading {
+    text-align: center;
+    line-height: 1.8em;
+}
+
+table tr#первая_строка_таблицы {
+    text-align: center;
+}
+
+td, th {
+    border: thin dotted gray;
+    padding: 5px;
+}
+
+footer {
+    background-color: #4a463b;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin: 0 10px 10px 10px;
+    font-size: 90%;
+}
+
+header.top {
+    margin: 10px 10px 0 10px;
+    height: 91px;
+}
+
+div.test {
+    display: inline-block;
+    position: relative;
+}
+
+a.drink {
+    display: table-cell;
+    background: white;
+    padding: 15px;
+    text-align: center;
+    vertical-align: top;
+    width: 33.3%;
+}
+
+.red_string {
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    /*width: 300px;*/
+    width: 100%;
+    height: 125px;
+    background-color: rgba(0, 0, 0, .5);
+    color: #fff;
+    padding: 75px 0 0;
+    text-align: center;
+    font-size: large;
+    opacity: 0;
+    transform: scale(0);
+    -webkit-transition: all .45s;
+    -o-transition: all .45s;
+    transition: all .45s;
+}
+
+div.test:hover p.red_string {
+    opacity: 1;
+    top: 0;
+    transform: scale(1);
+}
