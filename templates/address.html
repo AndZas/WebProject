@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Адреса</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+    <meta charset="utf-8">
+    <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript"
+            src="{{ url_for('static', filename='myLoc.js') }}"></script>
+    <link rel="stylesheet" href="/static/starbuzz.css">
+</head>
+<body>
+<header class="top">
+    <img id="headerLogo" src="../static/images/ЛОГОТИП_2.png" width="1430" height="91"
+         alt="Изображение логотипа кафе Starbuzz для верхнего колонтитула">
+</header>
+<nav>
+    <ul>
+        <li><a href="/">ДОМОЙ</a></li>
+        <li class="selected"><a href="/blog">БЛОГ</a></li>
+        <li><a href="/recipes">РЕЦЕПТЫ</a></li>
+        <li><a href="/address">АДРЕСА</a></li>
+    </ul>
+</nav>
+<div class="tableContainer">
+    <div class="tableRow">
+        <div id="info_geolocation">
+            <div class="Row_info">
+                <h1>Адрес номер 1</h1>
+                <p>г. Санкт-Петербург, пр-т. Науки, д. 21, корп. 1</p>
+                <p>Ежедневно с 10:00 до 22:00 (открыто - до закрытия 7 ч.)</p>
+            </div>
+            <div class="Row_info">
+                <h1>Адрес номер 2</h1>
+                <p>г. Санкт-Петербург, пр-т. Пятилеток, д. 2А</p>
+                <p>Ежедневно с 10:00 до 22:00 (открыто - до закрытия 7 ч.)</p>
+            </div>
+            <div class="Row_info">
+                <h1>Адрес номер 3</h1>
+                <p>г. Санкт-Петербург, ул. Фучика, д. 2</p>
+                <p>Ежедневно с 10:00 до 22:00 (открыто - до закрытия 7 ч.)</p>
+            </div>
+        </div>
+        <div id="map">
+        </div>
+    </div>
+</div>
+<footer>
+    &copy; 2012, Кафе Starbuzz
+    <br>
+    Все торговые марки, которые появляются на данном сайте,
+    являются собственностью меня.
+</footer>
+</body>
+</html>

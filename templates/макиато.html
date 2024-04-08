@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title_page %}
+    Рецепт Макиато
+{% endblock %}
+{% block name_of_coffee %}
+    Макиато
+{% endblock %}
+{% block image_coffee %}
+    <img class=pos_photo_of_coffe alt="эспрессо" src="../static/images/макиато.png" width="300" height="200">
+{% endblock %}
+{% block ol_recipe %}
+    <h2>Рецепт приготовления:</h2>
+    <li>Взбивать молоко, пока оно не разогреется до +60 °C.</li>
+    <li>Сварить порцию эспрессо (налить его в тёплую керамическую чашку).</li>
+    <li>Тонкой струйкой влить молочную пенку в эспрессо. Добавить по вкусу сахар (ванильный или обычный) и
+        карамельный сироп. Посыпать корицей или тертым шоколадом.
+    </li>
+{% endblock %}
+{% block table_of_propor %}
+    <tr id="первая_строка_таблицы">
+        <th>Кофе <a id="эспрессо_link_from_table" title="Как готовить эспрессо" href="/recipes/espresso">эспрессо</a></th>
+        <th>Молоко температурой +4 °C</th>
+    </tr>
+    <tr>
+        <td>25 – 30 мл</td>
+        <td>10 – 15 мл</td>
+    </tr>
+{% endblock %}

@@ -1,0 +1,228 @@
+{% extends 'main_base.html' %}
+{% block name_page %}Рецепты кофе{% endblock %}
+{% block link_style %}
+    <link rel="stylesheet" type="text/css" href="../static/starbuzz.css">{% endblock %}
+{% block main_info %}
+{#    <div class="tableContainer">#}
+{#        <div class="tableRow">#}
+{#            <div class="table_cell">#}
+{#                <div class="test">#}
+{#                    <a href="/recipes/espresso" class="red_string">Эспрессо</a>#}
+{#                    <a href="/recipes/espresso" class="drink" id="эспрессо">#}
+{#                        <img src="/static/images/эспрессо.png" alt="эспрессо" width="300" height="200">#}
+{#                        <p> Чёрный кофе, приготовленный в кофемашине или специальной кофеварке, где сквозь#}
+{#                            спрессованные молотые зёрна пропускают горячую воду под давлением 9 бар.#}
+{#                            Во вкусе эспрессо гармонично сочетаются сладость, горечь и лёгкая кислинка.#}
+{#                            Родина напитка – Италия.#}
+{#                        </p>#}
+{#                    </a>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="table_cell">#}
+{#                <div class="test">#}
+{#                    <a href="/recipes/ristretto" class="red_string">Ристретто</a>#}
+{#                    <a href="/recipes/ristretto" class="drink" id="ристретто">#}
+{#                        <img src="/static/images/ристретто.jpg" alt="ристретто" width="300" height="200">#}
+{#                        <p> Сладкий глоток эспрессо.#}
+{#                            Ристретто отличается более сладким вкусом и меньшим содержанием кофеина.#}
+{#                            Ристретто — это «укороченная» версия эспрессо. Основное отличие#}
+{#                            ристретто от эспрессо — меньшее соотношение кофе и воды.#}
+{#                        </p>#}
+{#                    </a>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="table_cell">#}
+{#                <div class="test">#}
+{#                    <a href="/recipes/lungo" class="red_string">Лунго</a>#}
+{#                    <a href="/recipes/lungo" class="drink" id="лунго">#}
+{#                        <img src="/static/images/лунго.png" alt="Лунго" width="300" height="200">#}
+{#                        <p> Напиток из кофе, приготовленный с помощью кофемашины по аналогии с#}
+{#                            эспрессо, но с большим количеством воды. Пролив воды через кофейную таблетку для#}
+{#                            приготовления#}
+{#                            лунго#}
+{#                            будет длиться дольше, чем в случае приготовления эспрессо.#}
+{#                        </p>#}
+{#                    </a>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="tableRow">#}
+{#            <div class="table_cell">#}
+{#                <div class="test">#}
+{#                    <a href="/recipes/americano" class="red_string">Американо</a>#}
+{#                    <a href="/recipes/americano" class="drink" id="американо">#}
+{#                        <img src="/static/images/американо.png" alt="американо" width="300" height="200">#}
+{#                        <p> Эспрессо с добавлением горячей воды.#}
+{#                            Чем больше воды, тем менее концентрированным получится напиток.#}
+{#                            Американо обладает не таким плотным телом, как эспрессо.#}
+{#                        </p>#}
+{#                    </a>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="table_cell">#}
+{#                <div class="test">#}
+{#                    <a href="/recipes/cappuccino" class="red_string">Капучино</a>#}
+{#                    <a href="/recipes/cappuccino" class="drink" id="капучино">#}
+{#                        <img src="/static/images/капучино.png" alt="капучино" width="300" height="200">#}
+{#                        <p> Кофейный напиток итальянской кухни на основе эспрессо с#}
+{#                            добавлением в него подогретого вспененного молока.#}
+{#                        </p>#}
+{#                    </a>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="table_cell">#}
+{#                <div class="test">#}
+{#                    <a href="/recipes/macchiato" class="red_string">Макиато</a>#}
+{#                    <a href="/recipes/macchiato" class="drink" id="макиато">#}
+{#                        <img src="/static/images/макиато.png" alt="макиато" width="300" height="200">#}
+{#                        <p> Кофейный напиток, изготавливаемый путем добавления к эспрессо#}
+{#                            минимального количества молока, обычно взбитого. Макиато#}
+{#                            существенно крепче и ароматнее, казалось бы, сходного по ингредиентам капучино.#}
+{#                        </p>#}
+{#                    </a>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="tableRow">#}
+{#            <div class="table_cell">#}
+{#                <div class="test">#}
+{#                    <a href="/recipes/latte" class="red_string">Латте</a>#}
+{#                    <a href="/recipes/latte" class="drink" id="Латте">#}
+{#                        <img src="/static/images/латте.png" alt="Латте" width="300" height="200">#}
+{#                        <p>#}
+{#                            Кофейный напиток, на основе молока, представляющий собой#}
+{#                            трёхслойную смесь из пены, молока и кофе эспрессо. Был изобретён в Италии.#}
+{#                        </p>#}
+{#                    </a>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="table_cell">#}
+{#                <div class="test">#}
+{#                    <a href="/recipes/kon_panna" class="red_string">Кон Панна</a>#}
+{#                    <a href="/recipes/kon_panna" class="drink" id="Кон Панна">#}
+{#                        <img src="/static/images/кон%20панна.png" alt="Кон Панна" width="300" height="200">#}
+{#                        <p>#}
+{#                            Как его чаще называют, эспрессо кон панна — это кофе со взбитыми сливками#}
+{#                            по-итальянски. Сливки для этого напитка используют не гладкие, как в случае#}
+{#                            с айриш-кофе или кофе по-венски, а хорошо взбитые, как#}
+{#                            говорят кондитеры - “до устойчивых пиков”.#}
+{#                        </p>#}
+{#                    </a>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="table_cell">#}
+{#                <div class="test">#}
+{#                    <a href="/recipes/mocha" class="red_string">Мокко</a>#}
+{#                    <a href="/recipes/mocha" class="drink" id="Мокко">#}
+{#                        <img src="/static/images/мокко.png" alt="Мокко" width="300" height="200">#}
+{#                        <p>#}
+{#                            Это напиток на основе эспрессо с добавлением молока, какао-порошка или шоколадного сиропа.#}
+{#                            Бариста украшают его взбитыми сливками, шоколадной стружкой, какао, корицей и иногда#}
+{#                            маршмеллоу.#}
+{#                        </p>#}
+{#                    </a>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+    <div class="tableContainer">
+        <div class="tableRow">
+            <a href="/recipes/espresso" class="drink" id="эспрессо">
+                <div class="test">
+                    <img src="../static/images/эспрессо.png" alt="эспрессо" width="300" height="200">
+                    <p class="red_string">Эспрессо</p>
+                </div>
+                <p> Чёрный кофе, приготовленный в кофемашине или специальной кофеварке, где сквозь
+                    спрессованные молотые зёрна пропускают горячую воду под давлением 9 бар.
+                    Во вкусе эспрессо гармонично сочетаются сладость, горечь и лёгкая кислинка.
+                    Родина напитка – Италия.
+                </p>
+            </a>
+            <a href="/recipes/ristretto" class="drink" id="ристретто">
+                <div class="test">
+                    <img src="../static/images/ристретто.jpg" alt="ристретто" width="300" height="200">
+                    <p class="red_string">Ристретто</p>
+                </div>
+                <p> Сладкий глоток эспрессо.
+                    Ристретто отличается более сладким вкусом и меньшим содержанием кофеина.
+                    Ристретто — это «укороченная» версия эспрессо. Основное отличие
+                    ристретто от эспрессо — меньшее соотношение кофе и воды.
+                </p>
+            </a>
+            <a href="/recipes/lungo" class="drink" id="лунго">
+                <div class="test">
+                    <img src="../static/images/лунго.png" alt="Лунго" width="300" height="200">
+                    <p class="red_string">Лунго</p>
+                </div>
+                <p> Напиток из кофе, приготовленный с помощью кофемашины по аналогии с
+                    эспрессо, но с большим количеством воды. Пролив воды через кофейную таблетку для приготовления
+                    лунго
+                    будет длиться дольше, чем в случае приготовления эспрессо.
+                </p>
+            </a>
+        </div>
+        <div class="tableRow">
+            <a href="/recipes/americano" class="drink" id="американо">
+                <div class="test">
+                    <img src="../static/images/американо.png" alt="американо" width="300" height="200">
+                    <p class="red_string">Американо</p>
+                </div>
+                <p> Эспрессо с добавлением горячей воды.
+                    Чем больше воды, тем менее концентрированным получится напиток.
+                    Американо обладает не таким плотным телом, как эспрессо.</p>
+            </a>
+            <a href="/recipes/cappuccino" class="drink" id="капучино">
+                <div class="test">
+                    <img src="../static/images/капучино.png" alt="капучино" width="300" height="200">
+                    <p class="red_string">Капучино</p>
+                </div>
+                <p> Кофейный напиток итальянской кухни на основе эспрессо с добавлением в него подогретого
+                    вспененного
+                    молока.</p>
+            </a>
+            <a href="/recipes/macchiato" class="drink" id="макиато">
+                <div class="test">
+                    <img src="../static/images/макиато.png" alt="макиато" width="300" height="200">
+                    <p class="red_string">Макиато</p>
+                </div>
+                <p> Кофейный напиток, изготавливаемый путем добавления к эспрессо минимального количества молока,
+                    обычно
+                    взбитого. Макиато существенно крепче и ароматнее, казалось бы, сходного по ингредиентам
+                    капучино.
+                </p>
+            </a>
+        </div>
+        <div class="tableRow">
+            <a href="/recipes/latte" class="drink" id="латте">
+                <div class="test">
+                    <img src="../static/images/латте.png" alt="Латте" width="300" height="200">
+                    <p class="red_string">Латте</p>
+                </div>
+                <p> Кофейный напиток, на основе молока, представляющий собой трёхслойную смесь из пены, молока и
+                    кофе
+                    эспрессо. Был изобретён в Италии. </p>
+            </a>
+            <a href="/recipes/kon_panna" class="drink" id="кон_панна">
+                <div class="test">
+                    <img src="../static/images/кон%20панна.png" alt="Кон Панна" width="300" height="200">
+                    <p class="red_string">Кон Панна</p>
+                </div>
+                <p>
+                    Как его чаще называют, эспрессо кон панна — это кофе со взбитыми сливками
+                    по-итальянски. Сливки для этого напитка используют не гладкие, как в случае
+                    с айриш-кофе или кофе по-венски, а хорошо взбитые, как
+                    говорят кондитеры - “до устойчивых пиков”.
+                </p>
+            </a>
+            <a href="/recipes/mocha" class="drink" id="мокко">
+                <div class="test">
+                    <img src="../static/images/мокко.png" alt="Мокко" width="300" height="200">
+                    <p class="red_string">Мокко</p>
+                </div>
+                <p> Это напиток на основе эспрессо с добавлением молока, какао-порошка или шоколадного сиропа.
+                    Бариста украшают его взбитыми сливками, шоколадной стружкой, какао, корицей и иногда
+                    маршмеллоу.</p>
+            </a>
+        </div>
+    </div>
+{% endblock %}

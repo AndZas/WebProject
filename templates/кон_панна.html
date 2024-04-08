@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title_page %}
+    Рецепт Кон Панна
+{% endblock %}
+{% block name_of_coffee %}
+    Кон Панна
+{% endblock %}
+{% block image_coffee %}
+    <img class=pos_photo_of_coffe alt="эспрессо" src="../static/images/кон%20панна.png" width="300" height="200">
+{% endblock %}
+{% block ol_recipe %}
+    <h2>Рецепт приготовления:</h2>
+    <li>Взбить сливки с 5 г сахара.</li>
+    <li>Прогреть керамическую чашку паром.</li>
+    <li>Сварить эспрессо.</li>
+    <li>Поверх кофе горкой выложить сливки.</li>
+    <li>Украсить сливки шоколадной стружкой, корицей, орехами, апельсиновой цедрой (по вкусу).</li>
+{% endblock %}
+{% block table_of_propor %}
+    <tr id="первая_строка_таблицы">
+        <th>Кофе <a id="эспрессо_link_from_table" title="Как готовить эспрессо" href="/recipes/espresso">эспрессо</a></th>
+        <th>Сливки жирностью 33–35%</th>
+        <th>Сахарная пудра</th>
+    </tr>
+    <tr>
+        <td>25 – 50 мл</td>
+        <td>20 мл</td>
+        <td>1 ч. л.</td>
+    </tr>
+{% endblock %}

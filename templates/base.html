@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title_page %}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='starbuzz.css') }}">
+</head>
+<body>
+<header class="top">
+    <img id="headerLogo" src="../static/images/ЛОГОТИП_2.png" width="1430" height="91"
+         alt="Изображение логотипа кафе Starbuzz для верхнего колонтитула">
+</header>
+<nav>
+    <ul>
+        <li><a href="/">ДОМОЙ</a></li>
+        <li class="selected"><a href="/blog">БЛОГ</a></li>
+        <li><a href="/recipes">РЕЦЕПТЫ</a></li>
+        <li><a href="/address">АДРЕСА</a></li>
+    </ul>
+</nav>
+<div class="tableContainer">
+    <div class="tableRow">
+        <section id="drinks">
+            <h1>НАПИТКИ</h1>
+            <p>Эспрессо 300₽</p>
+            <p>Ристретто 300₽</p>
+            <p>Лунго 300₽</p>
+            <p>Американо 300₽</p>
+            <p>Капучино, 300₽</p>
+            <p>Макиато 300₽</p>
+            <p>Латте, 300₽</p>
+            <p>Кон Панна 300₽</p>
+            <p>Мокко, 300₽</p>
+        </section>
+        <section class="section_рецепт_кофе">
+            <h1 class="h1_name_of_coffee">{% block name_of_coffee %}{% endblock %}</h1>
+            {% block image_coffee %}{% endblock %}
+            <ol>
+                {% block ol_recipe %}
+                {% endblock %}
+            </ol>
+            <div class="table_propor">
+                <p id="для_одной_чашки_тоже">Ингредиенты для приготовления кофе:</p>
+                <table id="пропорции_для_кофе_таблица">
+                    {% block table_of_propor %}{% endblock %}
+                </table>
+            </div>
+        </section>
+        <aside class="right_column">
+            <p class="beanheading">
+                <img src="../static/images/bag.gif" alt="Bean Machine bag">
+                <br>
+                Чтобы сделать ОНЛАЙН-ЗАКАЗ
+                <a id='do_order' href="/form" title="Нажмите для заказа">ЗАКАЗАТЬ КОФЕ</a>
+                <br>
+                <span class="slogan">
+                    СВЕЖИЙ <br>
+                    БЫСТРЫЙ <br>
+                    ПРЯМО К ВАМ ДОМОЙ <br>
+                </span>
+            </p>
+            <p>
+                Чего вы ждете? Вы можете заказать любой сорт кофе через Интернет Как это работает?
+                Просто щелкните на кнопку ЗАКАЗАТЬ КОФЕ, оформите заказ, и ваш кофе будет доставлен.
+            </p>
+        </aside>
+    </div>
+</div>
+<footer>
+    &copy; 2012, Кафе Starbuzz
+    <br>
+    Все торговые марки, которые появляются на данном сайте,
+    являются собственностью меня.
+</footer>
+</body>
+</html>

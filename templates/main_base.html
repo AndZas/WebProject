@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block name_page %}{% endblock %}</title>
+    {% block link_style %}{% endblock %}
+</head>
+<body>
+<header class="top">
+    <img id="headerLogo" src="../static/images/ЛОГОТИП_2.png" width="1430" height="91"
+         alt="Изображение логотипа кафе Starbuzz для верхнего колонтитула">
+</header>
+<nav>
+    <ul>
+        <li><a href="/">ДОМОЙ</a></li>
+        <li><a href="/blog">БЛОГ</a></li>
+        <li><a href="/recipes">РЕЦЕПТЫ</a></li>
+        <li><a href="/address">АДРЕСА</a></li>
+    </ul>
+</nav>
+{% block main_info %}{% endblock %}
+<footer>
+    &copy; 2012, Кафе Starbuzz
+    <br>
+    Все торговые марки, которые появляются на данном сайте,
+    являются собственностью меня.
+</footer>
+</body>
+</html>

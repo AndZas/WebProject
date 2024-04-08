@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Оформление заказа</title>
+    <link type="text/css" rel="stylesheet" href="../static/styledform.css">
+</head>
+<body>
+<div id="main">
+    <div id="header">
+        <h1>Bean Machine</h1>
+        <h2>Заполните следующую форму и нажмите кнопку «Заказать сейчас», чтобы оформить заказ</h2>
+    </div>
+    <form method="POST" action="/result">
+        <div class="tableRow">
+            <p>Выберите кофе:</p>
+            <p>
+                <label>
+                    <select name="beans">
+                        <option value="Арабика">Арабика</option>
+                        <option value="Робуста">Робуста</option>
+                        <option value="Либерика">Либерика</option>
+                        <option value="Эксцельза">Эксцельза</option>
+                    </select>
+                </label>
+            </p>
+        </div>
+        <div class="tableRow">
+            <p>Тип:</p>
+            <p>
+                <label><input type="radio" name="beantype" value="зерна"> Кофе в зернах</label><br>
+                <label><input type="radio" name="beantype" value="молотый" checked> Молотый кофе</label>
+            </p>
+        </div>
+        <div class="tableRow">
+            <p><label for="bags">Количество:</label></p>
+            <p><input type="number" id="bags" name="bags" min="1" max="10"></p>
+        </div>
+        <div class="tableRow label">
+            <p><label for="date">Доставить к:</label></p>
+            <p><input type="date" id="date" name="date"></p>
+        </div>
+        <div class="tableRow">
+            <p>Доп услуги:</p>
+            <p>
+                <label> <input type="checkbox" name="extras[]" value="подарочная упаковка"> Подарочная
+                    упаковка</label><br>
+                <label> <input type="checkbox" name="extras[]" value="каталог" checked> Доставка каталога вместе с
+                    заказом</label>
+            </p>
+        </div>
+        <div class="tableRow">
+            <p><label for="name">Имя:</label></p>
+            <p><input type="text" id="name" name="name" value="" placeholder="Иванов Иван"></p>
+        </div>
+        <div class="tableRow">
+            <p><label for="address">Адрес:</label></p>
+            <p><input type="text" id="address" name="address" value="" placeholder="Улица Пушкина, дом Колотушкина 5">
+            </p>
+        </div>
+        <div class="tableRow">
+            <p><label for="city">Город: </label></p>
+            <p><input type="text" id="city" name="city" value="" placeholder="Москва"></p>
+        </div>
+        <div class="tableRow">
+            <p><label for="state">Страна:</label></p>
+            <p><input type="text" id="state" name="state" value="" placeholder="Россия"></p>
+        </div>
+        <div class="tableRow">
+            <p><label for="zip">Почтовый индекс:</label></p>
+            <p><input type="text" id="zip" name="zip" value="" placeholder="101000"></p>
+        </div>
+        <div class="tableRow">
+            <p><label for="phone">Телефон:</label></p>
+            <p><input type="tel" id="phone" name="phone" value="" placeholder="+78901234567"></p>
+        </div>
+        <div class="tableRow">
+            <p><label for="comments">Комментарий:</label></p>
+            <p><textarea id="comments" name="comments" rows="10" cols="48"></textarea></p>
+        </div>
+        <div class="tableRow">
+            <p></p>
+            <p><input type="submit" value="Заказать сейчас"></p>
+        </div>
+    </form>
+</div>
+</body>
+</html>

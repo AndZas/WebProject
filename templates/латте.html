@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title_page %}
+    Рецепт Латте
+{% endblock %}
+{% block name_of_coffee %}
+    Латте
+{% endblock %}
+{% block image_coffee %}
+    <img class=pos_photo_of_coffe alt="эспрессо" src="../static/images/латте.png" width="300" height="200">
+{% endblock %}
+{% block ol_recipe %}
+    <h2>Рецепт приготовления:</h2>
+    <li>Взбить молоко.</li>
+    <li>Приготовить чёрный кофе.</li>
+    <li>Перелить кофе в бокал для айриш-кофе или керамическую чашку.</li>
+    <li>Тонкой струйкой влить молоко. При этом жидкости должны смешаться,
+        а на поверхности – образоваться пенка толщиной около 1 см.
+    </li>
+{% endblock %}
+{% block table_of_propor %}
+    <tr id="первая_строка_таблицы">
+        <th>Кофе <a id="эспрессо_link_from_table" title="Как готовить эспрессо" href="/recipes/espresso">эспрессо</a></th>
+        <th>Молоко</th>
+    </tr>
+    <tr>
+        <td>50 - 60 мл</td>
+        <td>100 - 180 мл</td>
+    </tr>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title_page %}
+    Рецепт Мокко
+{% endblock %}
+{% block name_of_coffee %}
+    Мокко
+{% endblock %}
+{% block image_coffee %}
+    <img class=pos_photo_of_coffe alt="эспрессо" src="../static/images/мокко.png" width="300" height="200">
+{% endblock %}
+{% block ol_recipe %}
+    <h2>Рецепт приготовления:</h2>
+    <li>Взбить молоко.</li>
+    <li>Приготовить чёрный кофе.</li>
+    <li>Перелить кофе в бокал для айриш-кофе или керамическую чашку.</li>
+    <li>Тонкой струйкой влить молоко. При этом жидкости должны смешаться,
+        а на поверхности – образоваться пенка толщиной около 1 см.
+    </li>
+{% endblock %}
+{% block table_of_propor %}
+    <tr id="первая_строка_таблицы">
+        <th>Кофе чёрное</th>
+        <th>Молоко</th>
+        <th>Шоколад</th>
+        <th>Взбитые сливки (по желанию)</th>
+    </tr>
+    <tr>
+        <td>50 мл</td>
+        <td>50 мл</td>
+        <td>60 г</td>
+        <td>15 – 20 г</td>
+    </tr>
+{% endblock %}
