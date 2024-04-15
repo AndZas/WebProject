@@ -73,8 +73,9 @@ h2 {
     background-color: black;
     border-radius: 15px;
 }
-.join_now a:hover {
-    background-col
+.join_now:hover {
+    background-color: #4c4c4c;
+    border-color: #4c4c4c;
 }
 .cont1 a{
     display: inline-flex;
