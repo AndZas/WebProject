@@ -16,6 +16,12 @@
         <li class="selected"><a href="/blog">БЛОГ</a></li>
         <li><a href="/recipes">РЕЦЕПТЫ</a></li>
         <li><a href="/address">АДРЕСА</a></li>
+        {% if current_user.is_authenticated %}
+        <li><a href="/logout">{{ username }}</a></li>
+        {% else %}
+        <li><a class="margin735px" href="/login">ВОЙТИ</a></li>
+        <li><a href="/register">РЕГИСТРАЦИЯ</a></li>
+        {% endif %}
     </ul>
 </nav>
 <div class="tableContainer">

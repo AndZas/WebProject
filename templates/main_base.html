@@ -6,21 +6,28 @@
     {% block link_style %}{% endblock %}
 </head>
 <body>
-<header class="top">
-    <img id="headerLogo" src="../static/images/ЛОГОТИП_2.png" width="1430" height="91"
-         alt="Изображение логотипа кафе Starbuzz для верхнего колонтитула">
-</header>
-<nav>
-    <ul>
-        <li><a href="/">ДОМОЙ</a></li>
-        <li><a href="/blog">БЛОГ</a></li>
-        <li><a href="/recipes">РЕЦЕПТЫ</a></li>
-        <li><a href="/address">АДРЕСА</a></li>
-    </ul>
-</nav>
+
+<div class="main_cont">
+    <div class="cont1">
+        <a href="/">ЛОГ</a>
+        <a href="/blog">MENU</a>
+        <a href="/recipes">RECIPES</a>
+        <a href="/address">Find a store</a>
+    </div>
+    <div class="cont2">
+
+        {% if current_user.is_authenticated %}
+        <a href="/logout">{{ username }}</a>
+        {% else %}
+        <a class="sign_in" href="/login">Sign in</a>
+        <a class="join_now" href="/register">Join now</a>
+        {% endif %}
+
+    </div>
+</div>
 {% block main_info %}{% endblock %}
 <footer>
-    &copy; 2012, Кафе Starbuzz
+    &copy; 2024, Кафе Starbuzz
     <br>
     Все торговые марки, которые появляются на данном сайте,
     являются собственностью меня.
