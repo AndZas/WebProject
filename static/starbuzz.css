@@ -1,14 +1,29 @@
 @font-face {
-    font-family: MyCustomFont; /* Название, которое будет использоваться для шрифта */
-    src: url('/static/DinRundschriftBreit (1).woff') format('woff'), /* Формат вашего шрифта */
+    font-family: MyCustomFont;
+    src: url("https://db.onlinewebfonts.com/t/d7e8a95865396cddca89b00080d2cba6.woff2") format("woff2")
 }
 
 body {
     background-color: white;
-    font-family: Arial;
-    font-size: large;
+    font-family: MyCustomFont, Arial, sans-serif;
+    font-size: 14px;
+}
+
+.avatar img {
+    padding-right: 10px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+}
+
+.avatar {
+    position: relative;
+    margin-left: auto;
+}
+
+.main_info {
     line-height: 30px;
-    width: 100%;
+    width: 1450px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -26,41 +41,45 @@ h2 {
     font-size: 110%;
 }
 
+.LOGO {
+    transition: .5s;
+}
+
+.LOGO:hover {
+    transform: scale(1.2);
+}
+
 .main_cont {
-    width: 100%;
-    height: 100%;
-    display: inline-flex;
-    background-color: white;
-    border-bottom: 2px solid #e8e8e8;
-    margin: 5px 10px 5px 10px;
+    border-bottom: 1px solid #e8e8e8;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 8%;
 }
 
-.cont1 a {
+div.cont1 a {
     color: black;
-}
-
-.cont1 {
-    list-style-type: none;
-    padding: 5px 0 5px 0;
-    text-align: center;
+    padding: 5px 10px 5px 10px;
 }
 
 .cont2 {
-    margin: 10px;
-    padding: 10px 0 5px 0;
-    margin-right: 10px;
     margin-left: auto;
 }
 
 .cont2 a {
+    width: 100%;
     font-size: 15px;
-    padding: 5px 10px 5px 10px;
+    padding: 5px 15px;
+    margin-left: 15px;
 }
 
 .sign_in {
-     color: #212121;
-     border: 1px solid black;
-     border-radius: 15px;
+    color: #212121;
+    border: 1px solid black;
+    border-radius: 15px;
 }
 
 .sign_in:hover {
@@ -73,18 +92,14 @@ h2 {
     background-color: black;
     border-radius: 15px;
 }
+
 .join_now:hover {
     background-color: #4c4c4c;
     border-color: #4c4c4c;
 }
-.cont1 a{
-    display: inline-flex;
-    padding: 5px 10px 5px 10px;
-}
 
-.cont1 a:link, .cont1 a:visited {
+.username_class {
     color: black;
-    font-weight: bold;
 }
 
 .cont1 a:hover {
@@ -162,50 +177,6 @@ div.tableRow {
     display: table-row;
 }
 
-/*div.test {*/
-/*    display: inline-block;*/
-/*    position: relative;*/
-/*}*/
-
-/*.test {*/
-/*    background: white;*/
-/*    font-size: large;*/
-/*    text-align: center;*/
-/*    vertical-align: top;*/
-/*    width: 440px;*/
-/*    height: 400px;*/
-/*    padding: 15px;*/
-/*}*/
-
-/*.table_cell {*/
-/*    display: table-cell;*/
-/*}*/
-
-/*.red_string {*/
-/*    margin: 0;*/
-/*    position: absolute;*/
-/*    top: 0;*/
-/*    left: 0;*/
-/*    background-color: rgba(0, 0, 0, .5);*/
-/*    font-size: 23px;*/
-/*    text-align: center;*/
-/*    width: 470px;*/
-/*    height: 215px;*/
-/*    color: #fff;*/
-/*    padding: 215px 0 0;*/
-/*    opacity: 0;*/
-/*    transform: scale(0);*/
-/*    -webkit-transition: all .45s;*/
-/*    -o-transition: all .45s;*/
-/*    transition: all .45s;*/
-/*}*/
-
-/*div.test:hover .red_string {*/
-/*    opacity: 1;*/
-/*    top: 0;*/
-/*    transform: scale(1);*/
-/*}*/
-
 .section_рецепт_кофе {
     display: table-cell;
     background: white;
@@ -232,7 +203,6 @@ div.tableRow {
 p#для_одной_чашки_тоже {
     font-weight: bold;
 }
-
 
 
 a.red_string {
@@ -275,12 +245,13 @@ td, th {
 }
 
 footer {
-    background-color: #4a463b;
-    color: white;
+    border-top: 1px solid #e8e8e8;
+    background-color: white;
+    color: black;
     text-align: center;
     padding: 15px;
     margin: 0 10px 10px 10px;
-    font-size: 90%;
+    font-size: 14px;
 }
 
 header.top {
@@ -326,4 +297,45 @@ div.test:hover p.red_string {
     opacity: 1;
     top: 0;
     transform: scale(1);
+}
+
+.menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu li {
+    float: left; /* Для расположения элементов горизонтально */
+    position: relative; /* Необходимо для позиционирования подменю */
+}
+
+.menu li a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+.menu li:hover {
+    background-color: #f0f0f0;
+}
+
+/* Стили для подменю */
+.submenu {
+    list-style-type: none;
+    padding: 0;
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+}
+
+.submenu li a {
+    width: 80px;
+}
+.menu li:hover .submenu {
+    display: block;
 }

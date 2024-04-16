@@ -9,9 +9,14 @@ from flask import render_template
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from data.login_form import LoginForm
 from data.user import RegisterForm
+from werkzeug.utils import secure_filename
+from data.edit_profile import EditProfileForm
+
+# from werkzeug.datastructures import FileStorage
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
+app.config['UPLOADED_IMAGES_DEST'] = 'static/avatars'
 login_manager = LoginManager()
 login_manager.init_app(app)
 
@@ -29,9 +34,55 @@ def get_name_by_id(user_id):
     db_sess = db_session.create_session()
     temp = db_sess.query(User).filter(User.id == str(user_id)).first()
     if temp:
-        print(temp.name)
         return temp.name
     return ''
+
+
+def get_src_by_id(user_id):
+    db_sess = db_session.create_session()
+    temp = db_sess.query(User).filter(User.id == str(user_id)).first()
+    if temp:
+        return temp.file
+    return ''
+
+
+@app.route('/home')
+@app.route('/')
+def home_page():
+    return render_template('index.html', username=get_name_by_id(current_user), filename=get_src_by_id(current_user))
+
+
+@app.route('/myprofile', methods=['GET', 'POST'])
+def my_profile():
+    form = EditProfileForm()
+    db_sess = db_session.create_session()
+    res = db_sess.query(User).filter(User.id == str(current_user)).first()
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            # if db_sess.query(User).filter(User.email == form.email.data).first():
+            #     return render_template('myprofile.html', first_name=res.name, surname=res.surname, username=res.name,
+            #                            filename=res.file, form=form, phone=res.phone, email=res.email,
+            #                            message='Such a user already exists')
+
+            file = form.file.data
+            frm = file.mimetype.split('/')[-1]
+            name_fl = file.filename.split(frm)[0][0:-1:1]
+            user = db_sess.query(User).filter(User.id == str(current_user)).first()
+            src = f'static/avatars/{name_fl}_{str(user.id)}.{frm}'
+            file.save(src)
+
+            res.name = form.name.data
+            res.surname = form.surname.data
+            res.email = form.email.data
+            res.phone = form.phone.data
+            res.file = src
+
+            db_sess.add(res)
+            db_sess.commit()
+            return redirect('/myprofile')
+    elif request.method == 'GET':
+        return render_template('myprofile.html', first_name=res.name, surname=res.surname, username=res.name,
+                               filename=res.file, form=form, phone=res.phone, email=res.email)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -62,13 +113,19 @@ def reqister():
             return render_template('register.html', title='Регистрация',
                                    form=form,
                                    message="Такой пользователь уже есть")
+
         user = User(
             name=form.name.data,
+            surname=form.surname.data,
             email=form.email.data,
+            phone=form.phone.data,
+            file='static/avatars/base_avatar.png'
         )
+
         user.set_password(form.password.data)
         db_sess.add(user)
         db_sess.commit()
+
         return redirect('/login')
     return render_template('register.html', title='Регистрация', form=form)
 
@@ -118,21 +175,14 @@ def address_page():
     return render_template('address.html')
 
 
-@app.route('/home')
-@app.route('/')
-def home_page():
-    name = get_name_by_id(current_user)
-    return render_template('index.html', username=name)
-
-
 @app.route('/blog')
 def blog_page():
-    return render_template('blog.html')
+    return render_template('blog.html', username=get_name_by_id(current_user), filename=get_src_by_id(current_user))
 
 
 @app.route('/recipes')
 def recipes_page():
-    return render_template('recipes.html')
+    return render_template('recipes.html', username=get_name_by_id(current_user), filename=get_src_by_id(current_user))
 
 
 @app.route('/recipes/espresso')

@@ -1,0 +1,30 @@
+{% extends 'main_base.html' %}
+{% block name_page %}Рецепты кофе{% endblock %}
+{% block link_style %}
+<link rel="stylesheet" type="text/css" href="../static/starbuzz.css">{% endblock %}
+{% block main_info %}
+<div class="cont_info_user_profile">
+    <form method="POST" enctype="multipart/form-data">
+
+        {{ form.hidden_tag() }}
+        <label for="file_input">
+            <img src="{{ filename }}" alt="Image" width="200" height="200">
+        </label>
+        {{ form.file(id='file_input', style='display:none') }}
+
+        <p>{{ form.name.label }} {{ form.name(class="test123", type="name", placeholder=first_name) }}</p>
+        <p>{{ form.surname.label }} {{ form.surname(class="test123", type="name", placeholder=surname) }}</p>
+        <p>{{ form.phone.label }} {{ form.phone(class="test123", type="phone", placeholder=phone) }}</p>
+        <p>{{ form.email.label }}{{ form.email(class="test123", type="email", placeholder=email) }}</p>
+        <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+        {{ message }}
+    </form>
+</div>
+<!--<div class="cont_info_user_profile">-->
+<!--    <img class="info_user_profile" src="{{filename}}">-->
+<!--    <h1 class="info_user_profile">{{ username2 }}</h1>-->
+<!--    <h4 class="info_user_profile">Your email: {{email}}</h4>-->
+<!--    <h4 class="info_user_profile">Your phone number: {{number}}</h4>-->
+<!--    &lt;!&ndash;    <h4 class="info_user_profile">Your address: {{address}}</h4>&ndash;&gt;-->
+<!--</div>-->
+{% endblock %}
