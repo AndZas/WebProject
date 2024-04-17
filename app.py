@@ -1,6 +1,7 @@
 import datetime
 import json
 import os
+import pprint
 
 from flask import url_for
 from flask import Flask, redirect, request
@@ -12,8 +13,6 @@ from data.login_form import LoginForm
 from data.user import RegisterForm
 from werkzeug.utils import secure_filename
 from data.edit_profile import EditProfileForm
-
-# from werkzeug.datastructures import FileStorage
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
@@ -60,10 +59,6 @@ def my_profile():
     res = db_sess.query(User).filter(User.id == str(current_user)).first()
     if request.method == 'POST':
         if form.validate_on_submit():
-            # if db_sess.query(User).filter(User.email == form.email.data).first():
-            #     return render_template('myprofile.html', first_name=res.name, surname=res.surname, username=res.name,
-            #                            filename=res.file, form=form, phone=res.phone, email=res.email,
-            #                            message='Such a user already exists')
             try:
                 file = form.file.data
                 frm = file.mimetype.split('/')[-1]
@@ -169,6 +164,7 @@ def show_result():
     zip_ = form_('zip')
     phone = form_('phone')
     comments = form_('comments')
+
     lst = [beans, bean_type, bags, date, extras, name, address, city, state, zip_, phone]
     if all(lst):
         return render_template('result.html',
@@ -184,7 +180,7 @@ def show_result():
 
 @app.route('/address')
 def address_page():
-    return render_template('address.html')
+    return render_template('address.html', username=get_name_by_id(current_user), filename=get_src_by_id(current_user))
 
 
 @app.route('/blog')
@@ -196,55 +192,19 @@ def blog_page():
 def recipes_page():
     with open('static/coffe.json') as file:
         data = json.load(file)
-        lst = [data['list1'] + data['list2'] + data['list3']]
-        print(lst)
+        lst = [data['list1'], data['list2'], data['list3']]
+        pprint.pprint(lst)
     return render_template('recipes.html', username=get_name_by_id(current_user), filename=get_src_by_id(current_user),
                            item=lst)
 
 
-@app.route('/recipes/espresso')
-def espresso_coffe_page():
-    return render_template('эспрессо.html')
-
-
-@app.route('/recipes/americano')
-def americano_coffe_page():
-    return render_template('американо.html')
-
-
-@app.route('/recipes/cappuccino')
-def cappuccino_coffe_page():
-    return render_template('капучино.html')
-
-
-@app.route('/recipes/kon_panna')
-def kon_panna_coffe_page():
-    return render_template('кон_панна.html')
-
-
-@app.route('/recipes/latte')
-def latte_coffe_page():
-    return render_template('латте.html')
-
-
-@app.route('/recipes/lungo')
-def lungo_coffe_page():
-    return render_template('лунго.html')
-
-
-@app.route('/recipes/macchiato')
-def macchiato_coffe_page():
-    return render_template('макиато.html')
-
-
-@app.route('/recipes/ristretto')
-def ristretto_coffe_page():
-    return render_template('ристретто.html')
-
-
-@app.route('/recipes/mocha')
-def mocha_coffe_page():
-    return render_template('мокко.html')
+@app.route('/recipes/<coffee_type>')
+def coffee_page(coffee_type):
+    if coffee_type in ['espresso', 'americano', 'cappuccino',
+                       'kon_panna', 'latte', 'lungo', 'macchiato', 'ristretto', 'mocha']:
+        return render_template(f'{coffee_type}.html')
+    else:
+        abort(404)
 
 
 def main():
@@ -255,21 +215,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///login.db'
-# db = SQLAlchemy(app)
-#
-#
-# class Item(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     title = db.Column(db.String(100), nullable=False)
-#     price = db.Column(db.Integer, nullable=False)
-#     isActive = db.Column(db.Boolean, default=True)
-#     # text = db.Column(db.Text, nullable=False)
-
-
-# чтобы создать базу данных надо в консоли прописать команды
-# python
-# from app import db
-# db.create_all()
-# exit()

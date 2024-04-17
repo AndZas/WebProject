@@ -4,20 +4,22 @@
 <link rel="stylesheet" type="text/css" href="../static/starbuzz.css">{% endblock %}
 {% block main_info %}
 <div class="tableContainer">
-    {% for k in range(3) %}
+    {% for count in range(3) %}
     <div class="tableRow">
-        {% for i in item[k] %}
-        <a href="/recipes/{{i[0]}}" class="drink" id="{{i[1]}}">
+        {% for i in item[count] %}
+        <a href="/recipes/{{i[0]}}" class="drink" id="{{ i[1] }}">
             <div class="test">
-                <img src="../static/images/{{i[2]}}" alt="{{i[1]}}" width="300" height="200">
-                <p class="red_string">{{i[1]}}</p>
+                <img src="../static/images/{{ i[2] }}" alt="{{i[1]}}" width="300" height="200">
+                <p class="red_string">{{ i[1] }}</p>
             </div>
-            <p>
-                {{i[3]}}
+            <p class="about_coffe">
+                {{ i[3] }}
             </p>
         </a>
         {% endfor %}
     </div>
     {% endfor %}
 </div>
+
+
 {% endblock %}
