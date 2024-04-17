@@ -10,5 +10,4 @@ class RegisterForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
     surname = StringField('Surname', validators=[DataRequired()])
     phone = StringField('Phone number', validators=[DataRequired()])
-    file = MultipleFileField('Profile picture. (optional)', validators=[DataRequired()])
     submit = SubmitField('Login')

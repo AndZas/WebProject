@@ -1,4 +1,5 @@
 import datetime
+import json
 import os
 
 from flask import url_for
@@ -63,26 +64,37 @@ def my_profile():
             #     return render_template('myprofile.html', first_name=res.name, surname=res.surname, username=res.name,
             #                            filename=res.file, form=form, phone=res.phone, email=res.email,
             #                            message='Such a user already exists')
+            try:
+                file = form.file.data
+                frm = file.mimetype.split('/')[-1]
+                name_fl = file.filename.split(frm)[0][0:-1:1]
+                user = db_sess.query(User).filter(User.id == str(current_user)).first()
+                src = f'static/avatars/{name_fl}_{str(user.id)}.{frm}'
+                file.save(src)
 
-            file = form.file.data
-            frm = file.mimetype.split('/')[-1]
-            name_fl = file.filename.split(frm)[0][0:-1:1]
-            user = db_sess.query(User).filter(User.id == str(current_user)).first()
-            src = f'static/avatars/{name_fl}_{str(user.id)}.{frm}'
-            file.save(src)
+                res.name = form.name.data if form.name.data else res.name
+                res.surname = form.surname.data if form.surname.data else res.surname
+                res.email = form.email.data if form.email.data else res.email
+                res.phone = form.phone.data if form.phone.data else res.phone
+                res.file = src if file else res.file
 
-            res.name = form.name.data
-            res.surname = form.surname.data
-            res.email = form.email.data
-            res.phone = form.phone.data
-            res.file = src
+                # Адрес запись в db
+                res.street = form.street.data if form.street.data else res.street
+                res.apartment = form.apartment.data if form.apartment.data else res.apartment
+                res.entrance = form.entrance.data if form.entrance.data else res.entrance
+                res.floor = form.floor.data if form.floor.data else res.floor
+                res.intercom = form.intercom.data if form.intercom.data else res.intercom
 
-            db_sess.add(res)
-            db_sess.commit()
-            return redirect('/myprofile')
+                db_sess.add(res)
+                db_sess.commit()
+                return redirect('/myprofile')
+            except Exception:
+                return redirect('/myprofile')
     elif request.method == 'GET':
         return render_template('myprofile.html', first_name=res.name, surname=res.surname, username=res.name,
-                               filename=res.file, form=form, phone=res.phone, email=res.email)
+                               filename=res.file, form=form, phone=res.phone, email=res.email,
+                               street=res.street, apartment=res.apartment, entrance=res.entrance,
+                               floor=res.floor, intercom=res.intercom)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -182,7 +194,12 @@ def blog_page():
 
 @app.route('/recipes')
 def recipes_page():
-    return render_template('recipes.html', username=get_name_by_id(current_user), filename=get_src_by_id(current_user))
+    with open('static/coffe.json') as file:
+        data = json.load(file)
+        lst = [data['list1'] + data['list2'] + data['list3']]
+        print(lst)
+    return render_template('recipes.html', username=get_name_by_id(current_user), filename=get_src_by_id(current_user),
+                           item=lst)
 
 
 @app.route('/recipes/espresso')

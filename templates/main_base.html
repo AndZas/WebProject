@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title>{% block name_page %}{% endblock %}</title>
     <script src="/static/for_main_base.js"></script>
+<!--    <script src="https://api-maps.yandex.ru/v3/?apikey=13df341c-1116-424c-bb5c-611e4ca2fe31&lang=ru_RU"></script>-->
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=13df341c-1116-424c-bb5c-611e4ca2fe31&lang=ru_RU"></script>
+    <script src="../static/yandex_map.js"></script>
     {% block link_style %}{% endblock %}
 </head>
 <body>
@@ -33,15 +36,12 @@
             <a class="sign_in" href="/login">Sign in</a>
             <a class="join_now" href="/register">Join now</a>
         </div>
-
         {% endif %}
     </div>
 </div>
-
 <div class="main_info">
     {% block main_info %}{% endblock %}
 </div>
-
 <footer>
     &copy; 2024, Кафе Starbuzz
     <br>

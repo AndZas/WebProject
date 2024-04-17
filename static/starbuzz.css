@@ -49,6 +49,34 @@ h2 {
     transform: scale(1.2);
 }
 
+.cont_info_user_profile {
+    width: 410px;
+}
+
+.test123 {
+    margin-top: 3.5px;
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 200px;
+    float: right;
+}
+
+.comment_class {
+    margin-top: 3.5px;
+    height: 152px;
+    width: 205px;
+    max-width: 205px;
+    max-height: 152px;
+    /*height: auto;*/
+    float: right;
+}
+
+.address_class {
+    margin-left: 25px;
+    margin-right: auto;
+    width: 400px;
+}
+
 .main_cont {
     border-bottom: 1px solid #e8e8e8;
     top: 0;
@@ -336,6 +364,7 @@ div.test:hover p.red_string {
 .submenu li a {
     width: 80px;
 }
+
 .menu li:hover .submenu {
     display: block;
 }

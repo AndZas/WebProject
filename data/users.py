@@ -13,6 +13,13 @@ class User(SqlAlchemyBase, UserMixin):
     phone = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     email = sqlalchemy.Column(sqlalchemy.String, index=True, unique=True, nullable=True)
     file = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+
+    street = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    apartment = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    entrance = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    floor = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    intercom = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+
     hashed_password = sqlalchemy.Column(sqlalchemy.String, nullable=True)
 
     def __repr__(self):
