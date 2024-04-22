@@ -10,41 +10,31 @@
     <img id="headerLogo" src="../static/images/ЛОГОТИП_2.png" width="1430" height="91"
          alt="Изображение логотипа кафе Starbuzz для верхнего колонтитула">
 </header>
-<nav>
-    <ul>
-        <li><a href="/">ДОМОЙ</a></li>
-        <li class="selected"><a href="/blog">БЛОГ</a></li>
-        <li><a href="/recipes">РЕЦЕПТЫ</a></li>
-        <li><a href="/address">АДРЕСА</a></li>
-        {% if current_user.is_authenticated %}
-        <li><a href="/logout">{{ username }}</a></li>
-        {% else %}
-        <li><a class="margin735px" href="/login">ВОЙТИ</a></li>
-        <li><a href="/register">РЕГИСТРАЦИЯ</a></li>
-        {% endif %}
-    </ul>
-</nav>
 <div class="tableContainer">
     <div class="tableRow">
-        <section id="drinks">
-            <h1>НАПИТКИ</h1>
-            <p>Эспрессо 300₽</p>
-            <p>Ристретто 300₽</p>
-            <p>Лунго 300₽</p>
-            <p>Американо 300₽</p>
-            <p>Капучино, 300₽</p>
-            <p>Макиато 300₽</p>
-            <p>Латте, 300₽</p>
-            <p>Кон Панна 300₽</p>
-            <p>Мокко, 300₽</p>
+        <section id="drinks" style="width: 200px; padding-left: 100px">
+            <h1 style="font-size: 30px; margin-top: 50px">Recipes</h1>
+            <hr>
+            <h1 style="font-size: 22px;">Drinks</h1>
+            <a href="/recipes/espresso" style="color: black; font-size: 15px"><p>Espresso</p></a>
+            <a href="/recipes/ristretto" style="color: black; font-size: 15px"><p>Ristretto</p></a>
+            <a href="/recipes/lungo" style="color: black; font-size: 15px"><p>Lungo</p></a>
+            <a href="/recipes/americano" style="color: black; font-size: 15px"><p>Americano</p></a>
+            <a href="/recipes/cappuccino" style="color: black; font-size: 15px"><p>Cappuccino</p></a>
+            <a href="/recipes/macchiato" style="color: black; font-size: 15px"><p>Macchiato</p></a>
+            <a href="/recipes/latte" style="color: black; font-size: 15px"><p>Latte</p></a>
+            <a href="/recipes/kon_panna" style="color: black; font-size: 15px"><p>Con panna</p></a>
+            <a href="/recipes/mocha" style="color: black; font-size: 15px"><p>Mocha</p></a>
         </section>
         <section class="section_рецепт_кофе">
-            <h1 class="h1_name_of_coffee">{% block name_of_coffee %}{% endblock %}</h1>
-            {% block image_coffee %}{% endblock %}
-            <ol>
-                {% block ol_recipe %}
-                {% endblock %}
-            </ol>
+            <h1 style="margin-left: 10px; font-size: 50px">{% block name_of_coffee %}{% endblock %}</h1>
+            <div style="display: flex; flex-direction: row">
+                {% block image_coffee %}{% endblock %}
+                <ol>
+                    {% block ol_recipe %}
+                    {% endblock %}
+                </ol>
+            </div>
             <div class="table_propor">
                 <p id="для_одной_чашки_тоже">Ингредиенты для приготовления кофе:</p>
                 <table id="пропорции_для_кофе_таблица">
@@ -52,28 +42,10 @@
                 </table>
             </div>
         </section>
-        <aside class="right_column">
-            <p class="beanheading">
-                <img src="../static/images/bag.gif" alt="Bean Machine bag">
-                <br>
-                Чтобы сделать ОНЛАЙН-ЗАКАЗ
-                <a id='do_order' href="/form" title="Нажмите для заказа">ЗАКАЗАТЬ КОФЕ</a>
-                <br>
-                <span class="slogan">
-                    СВЕЖИЙ <br>
-                    БЫСТРЫЙ <br>
-                    ПРЯМО К ВАМ ДОМОЙ <br>
-                </span>
-            </p>
-            <p>
-                Чего вы ждете? Вы можете заказать любой сорт кофе через Интернет Как это работает?
-                Просто щелкните на кнопку ЗАКАЗАТЬ КОФЕ, оформите заказ, и ваш кофе будет доставлен.
-            </p>
-        </aside>
     </div>
 </div>
 <footer>
-    &copy; 2012, Кафе Starbuzz
+    &copy; 2024, Кафе Starbuzz
     <br>
     Все торговые марки, которые появляются на данном сайте,
     являются собственностью меня.
