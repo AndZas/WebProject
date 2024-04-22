@@ -3,40 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block name_page %}{% endblock %}</title>
-    <script src="/static/for_main_base.js"></script>
-<!--    <script src="https://api-maps.yandex.ru/v3/?apikey=13df341c-1116-424c-bb5c-611e4ca2fe31&lang=ru_RU"></script>-->
+    <!--    <script src="https://api-maps.yandex.ru/v3/?apikey=13df341c-1116-424c-bb5c-611e4ca2fe31&lang=ru_RU"></script>-->
     <script src="https://api-maps.yandex.ru/2.1/?apikey=13df341c-1116-424c-bb5c-611e4ca2fe31&lang=ru_RU"></script>
     <script src="../static/yandex_map.js"></script>
     {% block link_style %}{% endblock %}
 </head>
 <body>
-<div class="under_line_class">
-    <div class="main_cont">
-        <a class="LOGO" href="/"><img alt="логотип" src="../static/images/image_212.png"></a>
-        <div class="cont1">
-            <a href="/blog">MENU</a>
-            <a href="/recipes">RECIPES</a>
-            <a href="/address">Find a store</a>
+<div style="border-bottom: 1px solid #e8e8e8;">
+    <div style="width: 1740px; margin-left: auto; margin-right: auto;">
+        <div class="main_cont">
+            <a class="LOGO" href="/"><img alt="логотип" src="../static/images/image_212.png"></a>
+            <div class="cont1">
+                <a href="/blog">MENU</a>
+                <a href="/recipes">RECIPES</a>
+                <a href="/address">Find a store</a>
+            </div>
+            {% if current_user.is_authenticated %}
+            <div class="avatar">
+                <ul class="menu">
+                    <li>
+                        <a href="#"><img onclick="toggleProfilePanel()" alt="avatar" src="{{ filename }}"></a>
+                        <ul class="submenu">
+                            <li><a href="/myprofile">My profile</a></li>
+                            <li><a href="/logout">Exit</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <a class="username_class">{{ username }}</a>
+            {% else %}
+            <div class="cont2">
+                <a class="sign_in" href="/login">Sign in</a>
+                <a class="join_now" href="/register">Join now</a>
+            </div>
+            {% endif %}
         </div>
-        {% if current_user.is_authenticated %}
-        <div class="avatar">
-            <ul class="menu">
-                <li>
-                    <a href="#"><img onclick="toggleProfilePanel()" alt="avatar" src="{{ filename }}"></a>
-                    <ul class="submenu">
-                        <li><a href="/myprofile">My profile</a></li>
-                        <li><a href="/logout">Exit</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-        <a class="username_class">{{ username }}</a>
-        {% else %}
-        <div class="cont2">
-            <a class="sign_in" href="/login">Sign in</a>
-            <a class="join_now" href="/register">Join now</a>
-        </div>
-        {% endif %}
     </div>
 </div>
 <div class="main_info">

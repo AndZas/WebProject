@@ -42,6 +42,7 @@ h2 {
 }
 
 .LOGO {
+    /*z-index: 0;*/
     transition: .5s;
 }
 
@@ -78,7 +79,7 @@ h2 {
 }
 
 .main_cont {
-    border-bottom: 1px solid #e8e8e8;
+
     top: 0;
     left: 0;
     right: 0;

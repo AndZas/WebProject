@@ -2,11 +2,12 @@ ymaps.ready(init);
 
 function init() {
     var currentPage = window.location.pathname;
+    var myLocation = ymaps.geolocation.get()
     if (currentPage === '/address') {
         center = [59.945752, 30.382842]
         zoom = 10
     } else if (currentPage === '/myprofile') {
-        center = [55, 34]
+        center = myLocation
         zoom = 17
     }
 

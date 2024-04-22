@@ -99,6 +99,7 @@ def login():
         db_sess = db_session.create_session()
         user = db_sess.query(User).filter(User.email == form.email.data).first()
         if user and user.check_password(form.password.data):
+            print(user)
             login_user(user, remember=form.remember_me.data)
             return redirect("/")
         return render_template('login.html',
