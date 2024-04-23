@@ -4,6 +4,16 @@ from flask_login import UserMixin
 from .db_session import SqlAlchemyBase
 
 
+class Product(SqlAlchemyBase, UserMixin):
+    __tablename__ = 'products'
+
+    user_id = sqlalchemy.Column(sqlalchemy.Integer, nullable=True)
+    id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True)
+    name = sqlalchemy.Column(sqlalchemy.String(100), nullable=True)
+    price = sqlalchemy.Column(sqlalchemy.Integer, nullable=True)
+    image_src = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+
+
 class User(SqlAlchemyBase, UserMixin):
     __tablename__ = 'users'
 
@@ -30,17 +40,3 @@ class User(SqlAlchemyBase, UserMixin):
 
     def check_password(self, password):
         return check_password_hash(self.hashed_password, password)
-
-
-class Item(SqlAlchemyBase, UserMixin):
-    __tablename__ = 'files'
-
-    user_id = sqlalchemy.Column(sqlalchemy.Integer)
-    id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, unique=True)
-    src = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    file_name = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    date = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    status = sqlalchemy.Column(sqlalchemy.Integer)
-
-    def __repr__(self):
-        return f'Запись: {str(self.id)} Юзер: {self.user_id}'

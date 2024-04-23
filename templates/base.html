@@ -1,3 +1,7 @@
+{% extends 'main_base.html' %}
+{% block name_page %}Menu{% endblock %}
+{% block link_style %}<link rel="stylesheet" type="text/css" href="../static/starbuzz.css">{% endblock %}
+{% block main_info %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,27 +9,9 @@
     <title>{% block title_page %}{% endblock %}</title>
     <link rel="stylesheet" type="text/css" href="../static/starbuzz.css">
 </head>
-<body>
-<header class="top">
-    <img id="headerLogo" src="../static/images/ЛОГОТИП_2.png" width="1430" height="91"
-         alt="Изображение логотипа кафе Starbuzz для верхнего колонтитула">
-</header>
+
 <div class="tableContainer">
     <div class="tableRow">
-        <section id="drinks" style="width: 200px; padding-left: 100px">
-            <h1 style="font-size: 30px; margin-top: 50px">Recipes</h1>
-            <hr>
-            <h1 style="font-size: 22px;">Drinks</h1>
-            <a href="/recipes/espresso" style="color: black; font-size: 15px"><p>Espresso</p></a>
-            <a href="/recipes/ristretto" style="color: black; font-size: 15px"><p>Ristretto</p></a>
-            <a href="/recipes/lungo" style="color: black; font-size: 15px"><p>Lungo</p></a>
-            <a href="/recipes/americano" style="color: black; font-size: 15px"><p>Americano</p></a>
-            <a href="/recipes/cappuccino" style="color: black; font-size: 15px"><p>Cappuccino</p></a>
-            <a href="/recipes/macchiato" style="color: black; font-size: 15px"><p>Macchiato</p></a>
-            <a href="/recipes/latte" style="color: black; font-size: 15px"><p>Latte</p></a>
-            <a href="/recipes/kon_panna" style="color: black; font-size: 15px"><p>Con panna</p></a>
-            <a href="/recipes/mocha" style="color: black; font-size: 15px"><p>Mocha</p></a>
-        </section>
         <section class="section_рецепт_кофе">
             <h1 style="margin-left: 10px; font-size: 50px">{% block name_of_coffee %}{% endblock %}</h1>
             <div style="display: flex; flex-direction: row">
@@ -44,11 +30,4 @@
         </section>
     </div>
 </div>
-<footer>
-    &copy; 2024, Кафе Starbuzz
-    <br>
-    Все торговые марки, которые появляются на данном сайте,
-    являются собственностью меня.
-</footer>
-</body>
-</html>
+{% endblock %}

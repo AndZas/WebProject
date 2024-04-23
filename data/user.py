@@ -3,6 +3,7 @@ from wtforms import PasswordField, StringField, SubmitField, EmailField, FileFie
 from wtforms.validators import DataRequired
 
 
+
 class RegisterForm(FlaskForm):
     email = EmailField('Email', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])

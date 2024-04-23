@@ -1,0 +1,53 @@
+{% extends 'main_base.html' %}
+{% block name_page %}Рецепты кофе{% endblock %}
+{% block link_style %}
+<script>
+    function f() {
+        alert('Create your account')
+    }
+
+    window.addEventListener("beforeunload", function (event) {
+        localStorage.setItem("scrollPosition", window.pageYOffset);
+    });
+
+    // Восстанавливаем положение скролла после загрузки страницы
+    window.addEventListener("load", function (event) {
+        var scrollPosition = localStorage.getItem("scrollPosition");
+        if (scrollPosition) {
+            window.scrollTo(0, parseInt(scrollPosition)); // Преобразуем строку в число
+            localStorage.removeItem("scrollPosition"); // Очищаем сохраненное значение
+            document.body.style.visibility = "visible";
+        }
+    });
+</script>
+{% endblock %}
+{% block main_info %}
+<form action="" method="post">
+    <div class="container">
+        {% for i in products_list %}
+        <div class="card" style="height: 150px; margin-top: 10px;">
+            <div class="card-body">
+                <div class="row">
+                    <!-- Изображение товара и название -->
+                    <div class="col-md-4" style="max-width: 200px">
+                        <img src="{{i[4]}}" class="img-fluid" alt="Изображение товара" width="100" height="100">
+                    </div>
+                    <div class="col-md-8">
+                        <h5 class="card-title">{{ i[2] }}</h5>
+                    </div>
+                    <div class="col-md-1">
+                        <button type="submit" name="{{i[1]}}" class="btn btn-danger">Remove</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="card-text">Price: ${{i[3]}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% endblock %}
+</form>

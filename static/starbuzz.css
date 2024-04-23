@@ -3,6 +3,11 @@
     src: url("https://db.onlinewebfonts.com/t/d7e8a95865396cddca89b00080d2cba6.woff2") format("woff2")
 }
 
+* {
+    padding: 0;
+    margin: 0;
+}
+
 body {
     background-color: white;
     font-family: MyCustomFont, Arial, sans-serif;
@@ -10,15 +15,19 @@ body {
 }
 
 .avatar img {
-    padding-right: 10px;
     width: 50px;
     height: 50px;
     border-radius: 50px;
 }
 
 .avatar {
+    padding-right: 10px;
     position: relative;
+}
+
+.margin_left_auto {
     margin-left: auto;
+    margin-right: 25px;
 }
 
 .main_info {
@@ -55,11 +64,23 @@ h2 {
 }
 
 .test123 {
-    margin-top: 3.5px;
-    border: 1px solid black;
-    border-radius: 10px;
-    width: 200px;
-    float: right;
+    margin-top: 4px;
+    width: 400px;
+    display: flex;
+    justify-content: space-between;
+    /*float: right;*/
+}
+
+.test1234 {
+    margin-top: 4px;
+    width: 550px;
+    display: flex;
+    justify-content: space-between;
+    /*float: right;*/
+}
+
+.width_for_profile_inputs {
+    width: 400px;
 }
 
 .comment_class {
@@ -79,7 +100,6 @@ h2 {
 }
 
 .main_cont {
-
     top: 0;
     left: 0;
     right: 0;
@@ -87,6 +107,10 @@ h2 {
     justify-content: space-between;
     align-items: center;
     padding: 0 8%;
+}
+
+.active {
+    box-shadow: inset 0 -6px #00754a;
 }
 
 div.cont1 a {
@@ -288,6 +312,12 @@ div.test {
     position: relative;
 }
 
+div.test2 {
+    display: inline-block;
+    position: relative;
+    max-height: 120px;
+}
+
 a.drink {
     color: black;
     display: table-cell;
@@ -304,7 +334,7 @@ a.drink {
 }
 
 a.drink:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 .about_coffe {
@@ -318,7 +348,7 @@ a.drink:hover {
     left: 0;
     /*width: 300px;*/
     width: 100%;
-    height: 125px;
+    height: 200px;
     background-color: rgba(0, 0, 0, .5);
     color: #fff;
     padding: 75px 0 0;
@@ -341,7 +371,6 @@ div.test:hover p.red_string {
     list-style-type: none;
     margin: 0;
     padding: 0;
-
 }
 
 .menu li {
@@ -374,7 +403,7 @@ div.test:hover p.red_string {
 }
 
 .submenu li a {
-    width: 80px;
+    width: 95px;
 }
 
 .menu li:hover .submenu {
@@ -382,6 +411,7 @@ div.test:hover p.red_string {
 }
 
 .tableContainer2 {
+
     display: flex;
     justify-content: space-between;
 }
@@ -392,4 +422,92 @@ div.test:hover p.red_string {
     position: relative;
     width: 500px;
     height: 500px;
+}
+
+.menu_card_item {
+    display: flex;
+    flex-direction: row;
+    margin-top: 30px
+}
+
+.first_a_menu_item {
+    display: flex;
+    flex-direction: row;
+    width: 650px
+}
+
+.first_a_menu_item img {
+    border-radius: 60px;
+    width: 120px;
+    height: 120px
+}
+
+div .h1_1 {
+    font-size: 25px;
+    margin-left: 20px;
+    margin-top: 5px
+}
+
+div .h1_2 {
+    font-size: 15px;
+    margin-left: 20px
+}
+
+.second_a_menu_item {
+    display: flex;
+    flex-direction: row;
+    width: 650px;
+    margin-left: 100px
+}
+
+.red_string_for_menu {
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    background-color: rgba(0, 0, 0, .5);
+    color: #fff;
+    border-radius: 100px;
+    padding: 48px 0 0;
+    text-align: center;
+    font-size: 30px;
+    opacity: 0;
+    /*transform: scale(0);*/
+    -webkit-transition: all .45s;
+    -o-transition: all .45s;
+    transition: all .45s;
+}
+
+div.test2:hover p.red_string_for_menu:hover {
+    opacity: 1;
+    top: 0;
+    /*transform: scale(1);*/
+}
+
+.cart_product_card {
+
+    margin: 20px 0 20px 0;
+    border: 1px solid black;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    display: flex;
+    /*justify-content: space-between;*/
+}
+
+.cart_product_card img {
+    width: 120px;
+    height: 120px;
+}
+
+.product_animation {
+    width: 120px;
+    height: 120px;
+    border-radius: 100px;
+}
+
+button:focus {
+    outline: none;
+    box-shadow: none;
 }

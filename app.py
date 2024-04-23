@@ -6,11 +6,12 @@ import pprint
 from flask import url_for
 from flask import Flask, redirect, request
 from data import db_session
-from data.users import User
+from data.users import User, Product
 from flask import render_template
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from data.login_form import LoginForm
 from data.user import RegisterForm
+from data.market_form import MarketForm
 from werkzeug.utils import secure_filename
 from data.edit_profile import EditProfileForm
 
@@ -19,6 +20,23 @@ app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 app.config['UPLOADED_IMAGES_DEST'] = 'static/avatars'
 login_manager = LoginManager()
 login_manager.init_app(app)
+
+products_dct = {
+    'espresso': [3.1, '../static/images/Default_Espresso_0.jpg'],
+    'cappuccino': [3.1, '../static/images/капучино.png'],
+    'frappuccino': [3.1, '../static/images/Default_Frappuccino_1.jpg'],
+    'hot_chocolate': [3, '../static/images/Default_Hot_chocolate_1.jpg'],
+    'irish_coffee': [3.1, '../static/images/Default_Irish_coffee_0.jpg'],
+    'vanilla_latte': [3, '../static/images/Default_Vanilla_latte_1.jpg'],
+    'vanilla_mocha': [3, '../static/images/Default_Vanilla_mocha_1.jpg'],
+    'caramel_mocha': [3, '../static/images/Default_Caramel_mocha_1.jpg'],
+    'cheesecake': [2.5, '../static/images/Default_Cheesecake_0.jpg'],
+    'croissant': [1.5, '../static/images/Default_Croissant_0.jpg'],
+    'muffin': [2, '../static/images/Default_Muffin_0.jpg'],
+    'tiramisu': [5, '../static/images/Default_Tiramisu_1.jpg'],
+    'sandwich': [2, '../static/images/Default_sandwich_0.jpg'],
+    'cookies': [1.5, '../static/images/Default_Cookie_1.jpg'],
+}
 
 
 def form_(s):
@@ -33,14 +51,31 @@ def take_form():
 def get_name_by_id(user_id):
     db_sess = db_session.create_session()
     temp = db_sess.query(User).filter(User.id == str(user_id)).first()
+    db_sess.close()
     if temp:
         return temp.name
     return ''
 
 
+def get_product_by_id(user_id):
+    db_sess = db_session.create_session()
+    try:
+        temp = db_sess.query(Product).filter(Product.user_id == str(user_id)).all()
+        lst = []
+        for i in temp:
+            lst.append([i.user_id, i.id, i.name, i.price, i.image_src])
+        db_sess.close()
+        if temp:
+            return lst
+        return ''
+    except Exception:
+        return ''
+
+
 def get_src_by_id(user_id):
     db_sess = db_session.create_session()
     temp = db_sess.query(User).filter(User.id == str(user_id)).first()
+    db_sess.close()
     if temp:
         return temp.file
     return ''
@@ -49,7 +84,8 @@ def get_src_by_id(user_id):
 @app.route('/home')
 @app.route('/')
 def home_page():
-    return render_template('index.html', username=get_name_by_id(current_user), filename=get_src_by_id(current_user))
+    return render_template('index.html', username=get_name_by_id(current_user), filename=get_src_by_id(current_user),
+                           products=len(get_product_by_id(current_user)))
 
 
 @app.route('/myprofile', methods=['GET', 'POST'])
@@ -86,10 +122,15 @@ def my_profile():
             except Exception:
                 return redirect('/myprofile')
     elif request.method == 'GET':
-        return render_template('myprofile.html', first_name=res.name, surname=res.surname, username=res.name,
-                               filename=res.file, form=form, phone=res.phone, email=res.email,
-                               street=res.street, apartment=res.apartment, entrance=res.entrance,
-                               floor=res.floor, intercom=res.intercom)
+        return render_template('myprofile.html',
+                               first_name=res.name, surname=res.surname,
+                               username=res.name, filename=res.file,
+                               form=form, phone=res.phone,
+                               email=res.email, street=res.street,
+                               apartment=res.apartment, entrance=res.entrance,
+                               floor=res.floor, intercom=res.intercom,
+                               products=len(get_product_by_id(current_user))
+                               )
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -113,12 +154,14 @@ def reqister():
     form = RegisterForm()
     if form.validate_on_submit():
         if form.password.data != form.password_again.data:
-            return render_template('register.html', title='Регистрация',
+            return render_template('register.html',
+                                   title='Регистрация',
                                    form=form,
                                    message="Пароли не совпадают")
         db_sess = db_session.create_session()
         if db_sess.query(User).filter(User.email == form.email.data).first():
-            return render_template('register.html', title='Регистрация',
+            return render_template('register.html',
+                                   title='Регистрация',
                                    form=form,
                                    message="Такой пользователь уже есть")
 
@@ -151,42 +194,35 @@ def load_user(user_id):
     return db_sess.query(User).get(user_id)
 
 
-@app.route('/result', methods=['POST'])
-def show_result():
-    beans = form_('beans')
-    bean_type = form_('beantype')
-    bags = form_('bags')
-    date = form_('date')
-    extras = form_('extras[]')
-    name = form_('name')
-    address = form_('address')
-    city = form_('city')
-    state = form_('state')
-    zip_ = form_('zip')
-    phone = form_('phone')
-    comments = form_('comments')
-
-    lst = [beans, bean_type, bags, date, extras, name, address, city, state, zip_, phone]
-    if all(lst):
-        return render_template('result.html',
-                               beans_the=beans, bean_type_the=bean_type,
-                               bags_the=bags, date_the=date,
-                               extras_the=extras, name_the=name,
-                               address_the=address, city_the=city,
-                               state_the=state, zip_the=zip_,
-                               phone_the=phone, comments_the=comments)
-    else:
-        return 'Не все поля были заполнены'
-
-
 @app.route('/address')
 def address_page():
-    return render_template('address.html', username=get_name_by_id(current_user), filename=get_src_by_id(current_user))
+    return render_template('address.html',
+                           username=get_name_by_id(current_user),
+                           filename=get_src_by_id(current_user),
+                           products=len(get_product_by_id(current_user)),
+                           active_page='find_a_store')
 
 
-@app.route('/blog')
+@app.route('/blog', methods=['POST', 'GET'])
 def blog_page():
-    return render_template('blog.html', username=get_name_by_id(current_user), filename=get_src_by_id(current_user))
+    if request.method == 'POST':
+        name = list(request.values.items())[0][0]
+        info_product = products_dct[name]
+        db_sess = db_session.create_session()
+        product = Product(
+            user_id=str(current_user),
+            name=name,
+            price=info_product[0],
+            image_src=info_product[1]
+        )
+        db_sess.add(product)
+        db_sess.commit()
+        return redirect('/blog')
+    return render_template('blog.html',
+                           username=get_name_by_id(current_user),
+                           filename=get_src_by_id(current_user),
+                           products=len(get_product_by_id(current_user)),
+                           active_page='menu')
 
 
 @app.route('/recipes')
@@ -194,18 +230,44 @@ def recipes_page():
     with open('static/coffe.json') as file:
         data = json.load(file)
         lst = [data['list1'], data['list2'], data['list3']]
-        pprint.pprint(lst)
-    return render_template('recipes.html', username=get_name_by_id(current_user), filename=get_src_by_id(current_user),
-                           item=lst)
+    return render_template('recipes.html',
+                           username=get_name_by_id(current_user),
+                           filename=get_src_by_id(current_user),
+                           item=lst,
+                           products=len(get_product_by_id(current_user)),
+                           active_page='recipes')
 
 
 @app.route('/recipes/<coffee_type>')
 def coffee_page(coffee_type):
     if coffee_type in ['espresso', 'americano', 'cappuccino',
                        'kon_panna', 'latte', 'lungo', 'macchiato', 'ristretto', 'mocha']:
-        return render_template(f'{coffee_type}.html')
+        return render_template(f'{coffee_type}.html',
+                               username=get_name_by_id(current_user),
+                               filename=get_src_by_id(current_user),
+                               products=len(get_product_by_id(current_user)))
     else:
         abort(404)
+
+
+@app.route('/cart', methods=['POST', 'GET'])
+def cart():
+    if request.method == 'POST':
+        name = list(request.values.items())[0][0]
+
+        db_sess = db_session.create_session()
+        record = db_sess.query(Product).filter(Product.id == name).first()
+        if record:
+            db_sess.delete(record)
+            db_sess.commit()
+            db_sess.close()
+        redirect('/cart')
+
+    info = get_product_by_id(current_user)
+    return render_template('market_buy.html',
+                           username=get_name_by_id(current_user),
+                           filename=get_src_by_id(current_user), products_list=info,
+                           products=len(info))
 
 
 def main():

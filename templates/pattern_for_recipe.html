@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title_page %}
+    Рецепт Лунго
+{% endblock %}
+{% block name_of_coffee %}
+    Лунго
+{% endblock %}
+{% block image_coffee %}
+    <img class=pos_photo_of_coffe alt="эспрессо" src="../static/images/лунго.png" width="250" height="180" style="margin: 30px">
+{% endblock %}
+{% block ol_recipe %}
+    <h2>Рецепт приготовления в кофеварке:</h2>
+    <li style="width: 1000px">Обжариваем чайную ложку кофейных зерен.</li>
+    <li style="width: 1000px">Перемалываем их в кофемолке около 20 секунд - до крупного помола.</li>
+    <li style="width: 1000px">Насыпаем 7-10 граммов кофе (это чуть меньше чайной ложки) в рожок кофеварки</li>
+    <li style="width: 1000px">Наливаем 70-100 мл воды в специальный отсек</li>
+    <li style="width: 1000px">Ждем, пока прокапается вся вода</li>
+    <li style="width: 1000px">Прогреваем толстостенную кружку, налив в нее крутой кипяток и оставив на пару минут</li>
+    <li style="width: 1000px">Выливаем из кружки кипяток и наливаем кофе. При желании, в напиток можно добавить сахар и молоко.
+    </li>
+{% endblock %}
+{% block table_of_propor %}
+    <tr id="первая_строка_таблицы">
+        <th>Кофе</th>
+        <th>Вода</th>
+    </tr>
+    <tr>
+        <td>7 - 9 г</td>
+        <td>60 - 120 мл</td>
+    </tr>
+{% endblock %}

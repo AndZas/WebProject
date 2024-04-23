@@ -1,79 +1,201 @@
 {% extends 'main_base.html' %}
 {% block name_page %}Menu{% endblock %}
 {% block link_style %}
-    <link rel="stylesheet" type="text/css" href="../static/starbuzz.css">{% endblock %}
+<link rel="stylesheet" type="text/css" href="../static/starbuzz.css">
+<style>body {
+    visibility: hidden;
+}</style>
+<script>
+    function f() {
+        alert('Create your account')
+    }
+
+    window.addEventListener("beforeunload", function (event) {
+        localStorage.setItem("scrollPosition", window.pageYOffset);
+    });
+
+    // Восстанавливаем положение скролла после загрузки страницы
+    window.addEventListener("load", function (event) {
+        var scrollPosition = localStorage.getItem("scrollPosition");
+        if (scrollPosition) {
+            window.scrollTo(0, parseInt(scrollPosition)); // Преобразуем строку в число
+            localStorage.removeItem("scrollPosition"); // Очищаем сохраненное значение
+            document.body.style.visibility = "visible";
+        }
+    });
+</script>
+{% endblock %}
 {% block main_info %}
+<form class="myForm" method="post">
     <div class="tableContainer" style="margin-left: 40px">
         <div class="tableRow">
             <div style="width: 1400px">
-                <h1 style="font-size: 40px">MENU</h1>
-                <h2 style="font-size: 25px">Drinks</h2>
+                <h1 style="font-size: 40px; margin-top: 10px">MENU</h1>
+                <h2 style="font-size: 25px; margin-top: 10px">Drinks</h2>
                 <hr>
             </div>
             <div>
-                <div style="display: flex; flex-direction: row; margin-top: 30px">
-                    <a style="display: flex; flex-direction: row; width: 650px" href="/recipes/espresso">
-                        <img src="static/images/Default_Espresso_0.jpg" style="border-radius: 60px; width: 120px">
-                        <div>
-                            <h1 style="font-size: 25px; margin-left: 20px; margin-top: 5px">Espresso</h1>
-                            <h1 style="font-size: 15px; margin-left: 20px">Strong black coffee, which is prepared in a coffee machine. Espresso has a pleasant aroma and a long aftertaste.</h1>
+                <div class="menu_card_item">
+                    <div class="first_a_menu_item">
+                        <div class="test2">
+                            {% if current_user.is_authenticated %}
+                            <button type="submit" name="espresso" value="espresso"
+                                    style="border: 0; background-color: white; margin: 0; padding: 0">
+                                <img alt="" class="product_animation" src="../static/images/Default_Espresso_0.jpg">
+                                <p class="red_string_for_menu">+</p>
+                            </button>
+                            {% else %}
+                            <img onclick="f()" alt="" class="product_animation"
+                                 src="../static/images/Default_Espresso_0.jpg">
+                            {% endif %}
                         </div>
-                    </a>
-                    <a style="display: flex; flex-direction: row; width: 650px; margin-left: 100px" href="/recipes/cappuccino">
-                        <img src="static/images/Default_Cappuccino_1.jpg" style="border-radius: 60px; width: 120px">
                         <div>
-                            <h1 style="font-size: 25px; margin-left: 20px; margin-top: 5px">Cappuccino</h1>
-                            <h1 style="font-size: 15px; margin-left: 20px">An Italian coffee drink made on the basis of espresso with the addition of foamed milk heated to 65 degrees.</h1>
+                            <h1 class="h1_1">Espresso</h1>
+                            <h1 class="h1_2">Strong black coffee, which is prepared in a coffee machine. Espresso has a
+                                pleasant aroma and a long aftertaste.</h1>
                         </div>
-                    </a>
+                    </div>
+                    <div class="second_a_menu_item">
+                        <div class="test2">
+                            {% if current_user.is_authenticated %}
+                            <button type="submit" name="cappuccino" value="cappuccino"
+                                    style="border: 0; background-color: white; margin: 0; padding: 0">
+                                <img alt="" class="product_animation" src="../static/images/капучино.png">
+                                <p class="red_string_for_menu">+</p>
+                            </button>
+                            {% else %}
+                            <img onclick="f()" alt="" class="product_animation"
+                                 src="../static/images/капучино.png">
+                            {% endif %}
+                        </div>
+                        <div>
+                            <h1 class="h1_1">Cappuccino</h1>
+                            <h1 class="h1_2">An Italian coffee drink made on the basis of espresso with the addition of
+                                foamed milk heated to 65 degrees.</h1>
+                        </div>
+                    </div>
                 </div>
-                <div style="display: flex; flex-direction: row; margin-top: 30px">
-                    <a style="display: flex; flex-direction: row; width: 650px" href="/recipes/frappuccino">
-                        <img src="static/images/Default_Frappuccino_1.jpg" style="border-radius: 60px; width: 120px">
-                        <div>
-                            <h1 style="font-size: 25px; margin-left: 20px; margin-top: 5px">Frappuccino</h1>
-                            <h1 style="font-size: 15px; margin-left: 20px">This drink consists of a mixture of cold milk, strong coffee, sugar and chocolate syrup.</h1>
+                <div class="menu_card_item">
+                    <div class="first_a_menu_item">
+                        <div class="test2">
+                            {% if current_user.is_authenticated %}
+                            <button type="submit" name="frappuccino" value="frappuccino"
+                                    style="border: 0; background-color: white; margin: 0; padding: 0">
+                                <img alt="" class="product_animation" src="../static/images/Default_Frappuccino_1.jpg">
+                                <p class="red_string_for_menu">+</p>
+                            </button>
+                            {% else %}
+                            <img onclick="f()" alt="" class="product_animation"
+                                 src="../static/images/Default_Frappuccino_1.jpg">
+                            {% endif %}
                         </div>
-                    </a>
-                    <a style="display: flex; flex-direction: row; width: 650px; margin-left: 100px" href="/recipes/hot_chocolate">
-                        <img src="static/images/Default_Hot_chocolate_1.jpg" style="border-radius: 60px; width: 120px">
                         <div>
-                            <h1 style="font-size: 25px; margin-left: 20px; margin-top: 5px">Hot chocolate</h1>
-                            <h1 style="font-size: 15px; margin-left: 20px">A warming and delicious drink made from cocoa powder, milk and various additives such as spices, vanilla or marshmallows.</h1>
+                            <h1 class="h1_1">Frappuccino</h1>
+                            <h1 class="h1_2">This drink consists of a mixture of cold milk, strong coffee, sugar and
+                                chocolate syrup.</h1>
                         </div>
-                    </a>
+                    </div>
+                    <div class="second_a_menu_item">
+                        <div class="test2">
+                            {% if current_user.is_authenticated %}
+                            <button type="submit" name="hot_chocolate" value="hot_chocolate"
+                                    style="border: 0; background-color: white; margin: 0; padding: 0">
+                                <img alt="" class="product_animation" src="../static/images/Default_Hot_chocolate_1.jpg">
+                                <p class="red_string_for_menu">+</p>
+                            </button>
+                            {% else %}
+                            <img onclick="f()" alt="" class="product_animation"
+                                 src="../static/images/Default_Hot_chocolate_1.jpg">
+                            {% endif %}
+                        </div>
+                        <div>
+                            <h1 class="h1_1">Hot chocolate</h1>
+                            <h1 class="h1_2">A warming and delicious drink made from cocoa powder, milk and various
+                                additives such as spices, vanilla or marshmallows.</h1>
+                        </div>
+                    </div>
                 </div>
-                <div style="display: flex; flex-direction: row; margin-top: 30px">
-                    <a style="display: flex; flex-direction: row; width: 650px" href="/recipes/irish_coffee">
-                        <img src="static/images/Default_Irish_coffee_0.jpg" style="border-radius: 60px; width: 120px">
-                        <div>
-                            <h1 style="font-size: 25px; margin-left: 20px; margin-top: 5px">Irish coffee</h1>
-                            <h1 style="font-size: 15px; margin-left: 20px">Hot alcoholic cocktail consisting of coffee, Irish whiskey, whipped cream and sugar. The cocktail has a creamy coffee flavor.</h1>
+                <div class="menu_card_item">
+                    <div class="first_a_menu_item">
+                        <div class="test2">
+                            {% if current_user.is_authenticated %}
+                            <button type="submit" name="irish_coffee" value="irish_coffee"
+                                    style="border: 0; background-color: white; margin: 0; padding: 0">
+                                <img alt="" class="product_animation" src="../static/images/Default_Irish_coffee_0.jpg">
+                                <p class="red_string_for_menu">+</p>
+                            </button>
+                            {% else %}
+                            <img onclick="f()" alt="" class="product_animation"
+                                 src="../static/images/Default_Irish_coffee_0.jpg">
+                            {% endif %}
                         </div>
-                    </a>
-                    <a style="display: flex; flex-direction: row; width: 650px; margin-left: 100px" href="/recipes/vanilla_latte">
-                        <img src="static/images/Default_Vanilla_latte_1.jpg" style="border-radius: 60px; width: 120px">
                         <div>
-                            <h1 style="font-size: 25px; margin-left: 20px; margin-top: 5px">Vanilla latte</h1>
-                            <h1 style="font-size: 15px; margin-left: 20px">A delicious and flavorful drink that consists of espresso, milk and vanilla syrup. It has a delicate creamy taste.</h1>
+                            <h1 class="h1_1">Irish coffee</h1>
+                            <h1 class="h1_2">Hot alcoholic cocktail consisting of coffee, Irish whiskey, whipped cream
+                                and
+                                sugar. The cocktail has a creamy coffee flavor.</h1>
                         </div>
-                    </a>
+                    </div>
+                    <div class="second_a_menu_item">
+                        <div class="test2">
+                            {% if current_user.is_authenticated %}
+                            <button type="submit" name="vanilla_latte" value="vanilla_latte"
+                                    style="border: 0; background-color: white; margin: 0; padding: 0">
+                                <img alt="" class="product_animation" src="../static/images/Default_Vanilla_latte_1.jpg">
+                                <p class="red_string_for_menu">+</p>
+                            </button>
+                            {% else %}
+                            <img onclick="f()" alt="" class="product_animation"
+                                 src="../static/images/Default_Vanilla_latte_1.jpg">
+                            {% endif %}
+                        </div>
+                        <div>
+                            <h1 class="h1_1">Vanilla latte</h1>
+                            <h1 class="h1_2">A delicious and flavorful drink that consists of espresso, milk and vanilla
+                                syrup. It has a delicate creamy taste.</h1>
+                        </div>
+                    </div>
                 </div>
-                <div style="display: flex; flex-direction: row; margin-top: 30px">
-                    <a style="display: flex; flex-direction: row; width: 650px" href="/recipes/vanilla_mocha">
-                        <img src="static/images/Default_Vanilla_mocha_1.jpg" style="border-radius: 60px; width: 120px">
-                        <div>
-                            <h1 style="font-size: 25px; margin-left: 20px; margin-top: 5px">Vanilla mocha</h1>
-                            <h1 style="font-size: 15px; margin-left: 20px">Sweet, fragrant and very tasty. Vanilla mocha is usually served with whipped cream and garnished with cinnamon or star anise.</h1>
+                <div class="menu_card_item">
+                    <div class="first_a_menu_item">
+                        <div class="test2">
+                            {% if current_user.is_authenticated %}
+                            <button type="submit" name="vanilla_mocha" value="vanilla_mocha"
+                                    style="border: 0; background-color: white; margin: 0; padding: 0">
+                                <img alt="" class="product_animation" src="../static/images/Default_Vanilla_mocha_1.jpg">
+                                <p class="red_string_for_menu">+</p>
+                            </button>
+                            {% else %}
+                            <img onclick="f()" alt="" class="product_animation"
+                                 src="../static/images/Default_Vanilla_mocha_1.jpg">
+                            {% endif %}
                         </div>
-                    </a>
-                    <a style="display: flex; flex-direction: row; width: 650px; margin-left: 100px" href="/recipes/caramel_mocha">
-                        <img src="static/images/Default_Caramel_mocha_1.jpg" style="border-radius: 60px; width: 120px">
                         <div>
-                            <h1 style="font-size: 25px; margin-left: 20px; margin-top: 5px">Caramel mocha</h1>
-                            <h1 style="font-size: 15px; margin-left: 20px">Exquisite coffee drink that combines the rich aroma of strong espresso, the soft sweetness of caramel and gentle warm milk.</h1>
+                            <h1 class="h1_1">Vanilla mocha</h1>
+                            <h1 class="h1_2">Sweet, fragrant and very tasty. Vanilla mocha is usually served with
+                                whipped
+                                cream and garnished with cinnamon or star anise.</h1>
                         </div>
-                    </a>
+                    </div>
+                    <div class="second_a_menu_item">
+                        <div class="test2">
+                            {% if current_user.is_authenticated %}
+                            <button type="submit" name="caramel_mocha" value="caramel_mocha"
+                                    style="border: 0; background-color: white; margin: 0; padding: 0">
+                                <img alt="" class="product_animation" src="../static/images/Default_Caramel_mocha_1.jpg">
+                                <p class="red_string_for_menu">+</p>
+                            </button>
+                            {% else %}
+                            <img onclick="f()" alt="" class="product_animation"
+                                 src="../static/images/Default_Caramel_mocha_1.jpg">
+                            {% endif %}
+                        </div>
+                        <div>
+                            <h1 class="h1_1">Caramel mocha</h1>
+                            <h1 class="h1_2">Exquisite coffee drink that combines the rich aroma of strong espresso, the
+                                soft sweetness of caramel and gentle warm milk.</h1>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div style="margin-top: 70px">
@@ -81,55 +203,131 @@
                 <hr>
             </div>
             <div>
-                <div style="display: flex; flex-direction: row; margin-top: 30px">
-                    <a style="display: flex; flex-direction: row; width: 650px" href="/recipes/cheesecake">
-                        <img src="static/images/Default_Cheesecake_0.jpg" style="border-radius: 60px; width: 120px">
-                        <div>
-                            <h1 style="font-size: 25px; margin-left: 20px; margin-top: 5px">Cheesecake</h1>
-                            <h1 style="font-size: 15px; margin-left: 20px">A delicate and delicious dessert made from soft cream cheese, sugar, cream and eggs.</h1>
+                <div class="menu_card_item">
+                    <div class="first_a_menu_item">
+                        <div class="test2">
+                            {% if current_user.is_authenticated %}
+                            <button type="submit" name="cheesecake" value="cheesecake"
+                                    style="border: 0; background-color: white; margin: 0; padding: 0">
+                                <img alt="" class="product_animation" src="../static/images/Default_Cheesecake_0.jpg">
+                                <p class="red_string_for_menu">+</p>
+                            </button>
+                            {% else %}
+                            <img onclick="f()" alt="" class="product_animation"
+                                 src="../static/images/Default_Cheesecake_0.jpg">
+                            {% endif %}
                         </div>
-                    </a>
-                    <a style="display: flex; flex-direction: row; width: 650px; margin-left: 100px" href="/recipes/croissant">
-                        <img src="static/images/Default_Croissant_0.jpg" style="border-radius: 60px; width: 120px">
                         <div>
-                            <h1 style="font-size: 25px; margin-left: 20px; margin-top: 5px">Croissant</h1>
-                            <h1 style="font-size: 15px; margin-left: 20px">A small flour pastry in the shape of a crescent made of puff pastry. It is a popular product of French cuisine.</h1>
+                            <h1 class="h1_1">Cheesecake</h1>
+                            <h1 class="h1_2">A delicate and delicious dessert made from soft cream cheese, sugar, cream
+                                and
+                                eggs.</h1>
                         </div>
-                    </a>
+                    </div>
+                    <div class="second_a_menu_item">
+                        <div class="test2">
+                            {% if current_user.is_authenticated %}
+                            <button type="submit" name="croissant" value="croissant"
+                                    style="border: 0; background-color: white; margin: 0; padding: 0">
+                                <img alt="" class="product_animation" src="../static/images/Default_Croissant_0.jpg">
+                                <p class="red_string_for_menu">+</p>
+                            </button>
+                            {% else %}
+                            <img onclick="f()" alt="" class="product_animation"
+                                 src="../static/images/Default_Croissant_0.jpg">
+                            {% endif %}
+                        </div>
+                        <div>
+                            <h1 class="h1_1">Croissant</h1>
+                            <h1 class="h1_2">A small flour pastry in the shape of a crescent made of puff pastry. It is
+                                a
+                                popular product of French cuisine.</h1>
+                        </div>
+                    </div>
                 </div>
-                <div style="display: flex; flex-direction: row; margin-top: 30px">
-                    <a style="display: flex; flex-direction: row; width: 650px" href="/recipes/cookies">
-                        <img src="static/images/Default_Cookie_1.jpg" style="border-radius: 60px; width: 120px">
-                        <div>
-                            <h1 style="font-size: 25px; margin-left: 20px; margin-top: 5px">Cookies</h1>
-                            <h1 style="font-size: 15px; margin-left: 20px">A pastry made from dough. It can be of different shapes and sizes, with or without filling.</h1>
+                <div class="menu_card_item">
+                    <div class="first_a_menu_item">
+                        <div class="test2">
+                            {% if current_user.is_authenticated %}
+                            <button type="submit" name="cookies" value="cookies"
+                                    style="border: 0; background-color: white; margin: 0; padding: 0">
+                                <img alt="" class="product_animation" src="../static/images/Default_Cookie_1.jpg">
+                                <p class="red_string_for_menu">+</p>
+                            </button>
+                            {% else %}
+                            <img onclick="f()" alt="" class="product_animation"
+                                 src="../static/images/Default_Cookie_1.jpg">
+                            {% endif %}
                         </div>
-                    </a>
-                    <a style="display: flex; flex-direction: row; width: 650px; margin-left: 100px" href="/recipes/muffin">
-                        <img src="static/images/Default_Muffin_0.jpg" style="border-radius: 60px; width: 120px">
                         <div>
-                            <h1 style="font-size: 25px; margin-left: 20px; margin-top: 5px">Muffin</h1>
-                            <h1 style="font-size: 15px; margin-left: 20px">Small round or oval pastries, mostly sweet. The composition of the muffin includes a variety of fillings.</h1>
+                            <h1 class="h1_1">Cookies</h1>
+                            <h1 class="h1_2">A pastry made from dough. It can be of different shapes and sizes, with or
+                                without filling.</h1>
                         </div>
-                    </a>
+                    </div>
+                    <div class="second_a_menu_item">
+                        <div class="test2">
+                            {% if current_user.is_authenticated %}
+                            <button type="submit" name="muffin" value="muffin"
+                                    style="border: 0; background-color: white; margin: 0; padding: 0">
+                                <img alt="" class="product_animation" src="../static/images/Default_Muffin_0.jpg">
+                                <p class="red_string_for_menu">+</p>
+                            </button>
+                            {% else %}
+                            <img onclick="f()" alt="" class="product_animation"
+                                 src="../static/images/Default_Muffin_0.jpg">
+                            {% endif %}
+                        </div>
+                        <div>
+                            <h1 class="h1_1">Muffin</h1>
+                            <h1 class="h1_2">Small round or oval pastries, mostly sweet. The composition of the muffin
+                                includes a variety of fillings.</h1>
+                        </div>
+                    </div>
                 </div>
-                <div style="display: flex; flex-direction: row; margin-top: 30px; margin-bottom: 100px">
-                    <a style="display: flex; flex-direction: row; width: 650px" href="/recipes/sandwich">
-                        <img src="static/images/Default_sandwich_0.jpg" style="border-radius: 60px; width: 120px">
-                        <div>
-                            <h1 style="font-size: 25px; margin-left: 20px; margin-top: 5px">Sandwich</h1>
-                            <h1 style="font-size: 15px; margin-left: 20px">A sandwich is a type of food that consists of two slices of bread with some filling in between.</h1>
+                <div class="menu_card_item" style="margin-bottom: 100px">
+                    <div class="first_a_menu_item">
+                        <div class="test2">
+                            {% if current_user.is_authenticated %}
+                            <button type="submit" name="sandwich" value="sandwich"
+                                    style="border: 0; background-color: white; margin: 0; padding: 0">
+                                <img alt="" class="product_animation" src="../static/images/Default_sandwich_0.jpg">
+                                <p class="red_string_for_menu">+</p>
+                            </button>
+                            {% else %}
+                            <img onclick="f()" alt="" class="product_animation"
+                                 src="../static/images/Default_sandwich_0.jpg">
+                            {% endif %}
                         </div>
-                    </a>
-                    <a style="display: flex; flex-direction: row; width: 650px; margin-left: 100px" href="/recipes/tiramisu">
-                        <img src="static/images/Default_Tiramisu_1.jpg" style="border-radius: 60px; width: 120px">
                         <div>
-                            <h1 style="font-size: 25px; margin-left: 20px; margin-top: 5px">Tiramisu</h1>
-                            <h1 style="font-size: 15px; margin-left: 20px">Italian multi-layered dessert consisting of mascarpone cheese, coffee, chicken eggs, sugar and savoyardi biscuits.</h1>
+                            <h1 class="h1_1">Sandwich</h1>
+                            <h1 class="h1_2">A sandwich is a type of food that consists of two slices of bread with some
+                                filling in between.</h1>
                         </div>
-                    </a>
+                    </div>
+                    <div class="second_a_menu_item">
+                        <div class="test2">
+                            {% if current_user.is_authenticated %}
+                            <button type="submit" name="sandwich" value="sandwich"
+                                    style="border: 0; background-color: white; margin: 0; padding: 0">
+                                <img alt="" class="product_animation" src="../static/images/Default_Tiramisu_1.jpg">
+                                <p class="red_string_for_menu">+</p>
+                            </button>
+                            {% else %}
+                            <img onclick="f()" alt="" class="product_animation"
+                                 src="../static/images/Default_Tiramisu_1.jpg">
+                            {% endif %}
+                        </div>
+                        <div>
+                            <h1 class="h1_1">Tiramisu</h1>
+                            <h1 class="h1_2">Italian multi-layered dessert consisting of mascarpone cheese, coffee,
+                                chicken
+                                eggs, sugar and savoyardi biscuits.</h1>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+</form>
 {% endblock %}

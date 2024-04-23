@@ -14,5 +14,5 @@ class EditProfileForm(FlaskForm):
     entrance = StringField('Entrance')
     floor = StringField('Floor')
     intercom = StringField('Intercom')
-    comment = TextAreaField('Comment for courier', render_kw={"rows": 10})
+    comment = TextAreaField('Comment', render_kw={"rows": 10})
     submit = SubmitField('Save Changes')

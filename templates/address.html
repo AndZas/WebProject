@@ -1,33 +1,26 @@
 {% extends 'main_base.html' %}
 {% block name_page %}Рецепты кофе{% endblock %}
 {% block link_style %}
-<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
-<meta charset="utf-8">
-<link rel="stylesheet" href="/static/starbuzz.css">
-{% endblock %}
+<link rel="stylesheet" href="../static/starbuzz.css">{% endblock %}
 {% block main_info %}
-<body>
 <div class="tableContainer2">
-
-    <div id="info_geolocation">
+    <div id="info_geolocation" style="margin-top: 10px">
         <div class="Row_info">
-            <h1>Адрес номер 1</h1>
-            <p>г. Санкт-Петербург, пр-т. Науки, д. 21, корп. 1</p>
-            <p>Ежедневно с 10:00 до 22:00 (открыто - до закрытия 7 ч.)</p>
+            <h1>Address number 1</h1>
+            <p>St. Petersburg, ave. Sciences, 21, building 1</p>
+            <p>Daily from 10:00 to 22:00</p>
         </div>
         <div class="Row_info">
-            <h1>Адрес номер 2</h1>
-            <p>г. Санкт-Петербург, пр-т. Пятилеток, д. 2А</p>
-            <p>Ежедневно с 10:00 до 22:00 (открыто - до закрытия 7 ч.)</p>
+            <h1>Address number 2</h1>
+            <p>St. Petersburg, ave. Five-year plan, 2A</p>
+            <p>Daily from 10:00 to 22:00</p>
         </div>
         <div class="Row_info">
-            <h1>Адрес номер 3</h1>
-            <p>г. Санкт-Петербург, ул. Фучика, д. 2</p>
-            <p>Ежедневно с 10:00 до 22:00 (открыто - до закрытия 7 ч.)</p>
+            <h1>Address number 3</h1>
+            <p>St. Petersburg, Fuchika str., 2</p>
+            <p>Daily from 10:00 to 22:00</p>
         </div>
     </div>
     <div id="map" class="map_class"></div>
 </div>
-
-</body>
 {% endblock %}
