@@ -21,10 +21,7 @@ function init() {
     if (currentPage === '/address') {
         let lst = [[60.010987, 30.400480], [59.919581, 30.465348], [59.877127, 30.358888]]
         for (i = 0; i < 3; i++) {
-            var myPlacemark = new ymaps.Placemark(lst[i], { // координаты метки
-                hintContent: 'Москва', // подсказка при наведении на метку
-                balloonContent: 'Столица России' // контент во всплывающем окне метки
-            });
+            var myPlacemark = new ymaps.Placemark(lst[i]);
             myMap.geoObjects.add(myPlacemark);
         }
     } else if (currentPage === '/myprofile') {

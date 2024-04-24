@@ -119,6 +119,7 @@ div.cont1 a {
 }
 
 .cont2 {
+    position: relative;
     margin-left: auto;
 }
 
@@ -136,6 +137,7 @@ div.cont1 a {
 }
 
 .sign_in:hover {
+    color: black;
     background-color: #e5e5e5;
 }
 
@@ -147,6 +149,7 @@ div.cont1 a {
 }
 
 .join_now:hover {
+    color: white;
     background-color: #4c4c4c;
     border-color: #4c4c4c;
 }
@@ -472,7 +475,7 @@ div .h1_2 {
     border-radius: 100px;
     padding: 48px 0 0;
     text-align: center;
-    font-size: 30px;
+    font-size: 18px;
     opacity: 0;
     /*transform: scale(0);*/
     -webkit-transition: all .45s;

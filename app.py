@@ -1,7 +1,5 @@
-import datetime
 import json
 import os
-import pprint
 
 from flask import url_for
 from flask import Flask, redirect, request
@@ -11,7 +9,6 @@ from flask import render_template
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from data.login_form import LoginForm
 from data.user import RegisterForm
-from data.market_form import MarketForm
 from werkzeug.utils import secure_filename
 from data.edit_profile import EditProfileForm
 
@@ -39,15 +36,6 @@ products_dct = {
 }
 
 
-def form_(s):
-    return request.form[s]
-
-
-@app.route('/form')
-def take_form():
-    return render_template('form.html')
-
-
 def get_name_by_id(user_id):
     db_sess = db_session.create_session()
     temp = db_sess.query(User).filter(User.id == str(user_id)).first()
@@ -55,6 +43,19 @@ def get_name_by_id(user_id):
     if temp:
         return temp.name
     return ''
+
+
+def get_product_no_repeat(lst):
+    dct = {}
+    for i in lst:
+        if i[2] not in dct:
+            dct[i[2]] = [i[0], [i[1]], i[2], i[3], i[4], 1, i[3]]
+        else:
+            dct[i[2]][1].append(i[1])
+            dct[i[2]][5] += 1
+            dct[i[2]][6] += i[3]
+    dct = {k: v for k, v in sorted(dct.items(), key=lambda x: x[1][5])[::-1]}
+    return dct
 
 
 def get_product_by_id(user_id):
@@ -140,7 +141,6 @@ def login():
         db_sess = db_session.create_session()
         user = db_sess.query(User).filter(User.email == form.email.data).first()
         if user and user.check_password(form.password.data):
-            print(user)
             login_user(user, remember=form.remember_me.data)
             return redirect("/")
         return render_template('login.html',
@@ -165,14 +165,14 @@ def reqister():
                                    form=form,
                                    message="Такой пользователь уже есть")
 
-        user = User(
-            name=form.name.data,
-            surname=form.surname.data,
-            email=form.email.data,
-            phone=form.phone.data,
-            file='static/avatars/base_avatar.png'
-        )
+        user = User()
 
+        user.name = form.name.data
+        user.surname = form.surname.data
+        user.email = form.email.data
+        user.phone = form.phone.data
+
+        user.file = 'static/avatars/base_avatar.png'
         user.set_password(form.password.data)
         db_sess.add(user)
         db_sess.commit()
@@ -203,26 +203,29 @@ def address_page():
                            active_page='find_a_store')
 
 
-@app.route('/blog', methods=['POST', 'GET'])
+@app.route('/menu', methods=['POST', 'GET'])
 def blog_page():
     if request.method == 'POST':
         name = list(request.values.items())[0][0]
         info_product = products_dct[name]
         db_sess = db_session.create_session()
-        product = Product(
-            user_id=str(current_user),
-            name=name,
-            price=info_product[0],
-            image_src=info_product[1]
-        )
+
+        product = Product()
+
+        product.user_id = str(current_user)
+        product.name = name
+        product.price = info_product[0]
+        product.image_src = info_product[1]
+
         db_sess.add(product)
         db_sess.commit()
-        return redirect('/blog')
-    return render_template('blog.html',
+        return redirect('/menu')
+    prices = [i[0] for i in products_dct.values()]
+    return render_template('menu.html',
                            username=get_name_by_id(current_user),
                            filename=get_src_by_id(current_user),
                            products=len(get_product_by_id(current_user)),
-                           active_page='menu')
+                           active_page='menu', prices=prices)
 
 
 @app.route('/recipes')
@@ -254,7 +257,6 @@ def coffee_page(coffee_type):
 def cart():
     if request.method == 'POST':
         name = list(request.values.items())[0][0]
-
         db_sess = db_session.create_session()
         record = db_sess.query(Product).filter(Product.id == name).first()
         if record:
@@ -264,10 +266,20 @@ def cart():
         redirect('/cart')
 
     info = get_product_by_id(current_user)
+    info2 = get_product_no_repeat(info)
+    result = 0
+    for k, v in info2.items():
+        result += v[-1]
     return render_template('market_buy.html',
                            username=get_name_by_id(current_user),
-                           filename=get_src_by_id(current_user), products_list=info,
-                           products=len(info))
+                           filename=get_src_by_id(current_user), products_list=info2,
+                           products=len(info),
+                           result=result)
+
+
+@app.route('/pay', methods=['POST', 'GET'])
+def pay():
+    return ''
 
 
 def main():
