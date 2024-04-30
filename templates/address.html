@@ -1,26 +1,53 @@
 {% extends 'main_base.html' %}
 {% block name_page %}Рецепты кофе{% endblock %}
 {% block link_style %}
-<link rel="stylesheet" href="../static/starbuzz.css">{% endblock %}
+<link rel="stylesheet" href="../static/starbuzz.css">
+<script>
+    function clearFields() {
+        document.getElementById("name").value = "";
+        document.getElementById("desc").value = "";
+        document.getElementById("work_time").value = "";
+    }
+</script>
+{% endblock %}
+
 {% block main_info %}
+
 <div class="tableContainer2">
     <div id="info_geolocation" style="margin-top: 10px">
+        {% if flag %}
         <div class="Row_info">
-            <h1>Address number 1</h1>
-            <p>St. Petersburg, ave. Sciences, 21, building 1</p>
-            <p>Daily from 10:00 to 22:00</p>
+
+
+            <form method="post">
+                <div class="form-row">
+                    {{ form.hidden_tag() }}
+                    <div class="col-3">
+                        {{ form.name(class="form-control", id="name", type="text", placeholder="Name") }}
+                    </div>
+                    <div class="col-6">
+                        {{ form.desc(class="form-control", id="desc", type="text", placeholder="Desc") }}
+                    </div>
+                    <div class="col-2">
+                        {{ form.work_time(class="form-control", id="work_time", type="text", placeholder="Work time") }}
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-primary">Add</button>
+                    </div>
+                </div>
+            </form>
+
         </div>
+        {% endif %}
+        {% for i in items %}
         <div class="Row_info">
-            <h1>Address number 2</h1>
-            <p>St. Petersburg, ave. Five-year plan, 2A</p>
-            <p>Daily from 10:00 to 22:00</p>
+            <h1>{{ i.name }}</h1>
+            <p>{{ i.desc }}</p>
+            <p>{{ i.work_time }}</p>
         </div>
-        <div class="Row_info">
-            <h1>Address number 3</h1>
-            <p>St. Petersburg, Fuchika str., 2</p>
-            <p>Daily from 10:00 to 22:00</p>
-        </div>
+        {% endfor %}
     </div>
-    <div id="map" class="map_class"></div>
+    <img class="map_class" alt="" src="/static/images/map.png">
+    <!--    <div id="map" class="map_class"></div>-->
 </div>
 {% endblock %}

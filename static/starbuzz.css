@@ -424,7 +424,7 @@ div.test:hover p.red_string {
     padding-left: 30px;
     position: relative;
     width: 500px;
-    height: 500px;
+    height: 450px;
 }
 
 .menu_card_item {
@@ -436,7 +436,8 @@ div.test:hover p.red_string {
 .first_a_menu_item {
     display: flex;
     flex-direction: row;
-    width: 650px
+    min-width: 200px;
+    width: 650px;
 }
 
 .first_a_menu_item img {

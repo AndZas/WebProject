@@ -1,16 +1,17 @@
 import json
 import os
-
 from flask import url_for
 from flask import Flask, redirect, request
 from data import db_session
-from data.users import User, Product
+from data.users import User, Product, Address
 from flask import render_template
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from data.login_form import LoginForm
 from data.user import RegisterForm
 from werkzeug.utils import secure_filename
 from data.edit_profile import EditProfileForm
+from data.address_form import AddressForm
+import requests
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
@@ -42,6 +43,15 @@ def get_name_by_id(user_id):
     db_sess.close()
     if temp:
         return temp.name
+    return ''
+
+
+def get_all_address():
+    db_sess = db_session.create_session()
+    temp = db_sess.query(Address).all()
+    db_sess.close()
+    if temp:
+        return temp
     return ''
 
 
@@ -79,6 +89,15 @@ def get_src_by_id(user_id):
     db_sess.close()
     if temp:
         return temp.file
+    return ''
+
+
+def get_email_by_id(user_id):
+    db_sess = db_session.create_session()
+    user = db_sess.query(User).filter(User.id == str(user_id)).first()
+    db_sess.close()
+    if user:
+        return user.email
     return ''
 
 
@@ -194,13 +213,74 @@ def load_user(user_id):
     return db_sess.query(User).get(user_id)
 
 
-@app.route('/address')
+def get_coord(st):
+    geocoder_request = f"http://geocode-maps.yandex.ru/1.x/?apikey=40d1649f-0493-4b70-98ba-98533de7710b&geocode={st}&format=json"
+
+    response = requests.get(geocoder_request).json()
+    longitude, lattitude = response["response"]["GeoObjectCollection"]["featureMember"][0]['GeoObject']["Point"][
+        "pos"].split()
+    return float(longitude), float(lattitude)
+
+
+def getImage(coords):
+    map_request = f"http://static-maps.yandex.ru/1.x/?lang=ru_RU&ll=30.258814,59.908805&size=500,450&z=10&apikey=1a414c4d-1ca3-4d7a-accf-39ce347917f8&l=map"
+    if coords:
+        res = '&pt='
+        for i in coords:
+            res += f'{i[0]},{i[1]},pm2dbm~'
+        map_request += res.strip('~')
+
+    response = requests.get(map_request)
+    if not response:
+        print("Http статус:", response.status_code, "(", response.reason, ")")
+
+    # Запишем полученное изображение в файл.
+    map_file = "static/images/map.png"
+    with open(map_file, "wb") as file:
+        file.write(response.content)
+
+
+def get_map():
+    cords = get_all_address()
+    lst = []
+    for i in cords:
+        lst.append(get_coord(i.desc))
+    getImage(lst)
+
+
+@app.route('/address', methods=['GET', 'POST'])
 def address_page():
+    get_map()
+    form = AddressForm()
+
+    if request.method == 'POST':
+        db_sess = db_session.create_session()
+        address = Address()
+
+        address.name = form.name.data
+        address.desc = form.desc.data
+        address.work_time = form.work_time.data
+        print(form.name.data, form.desc.data, form.work_time.data)
+        db_sess.add(address)
+        db_sess.commit()
+        db_sess.close()
+        get_map()
+        redirect(url_for('address_page'))
+
+    user = get_email_by_id(current_user)
+
+    flag = False
+    if user == 'admin@gmail.com':
+        flag = True
+
     return render_template('address.html',
                            username=get_name_by_id(current_user),
                            filename=get_src_by_id(current_user),
                            products=len(get_product_by_id(current_user)),
-                           active_page='find_a_store')
+                           active_page='find_a_store',
+                           items=get_all_address(),
+                           flag=flag,
+                           form=form)
 
 
 @app.route('/menu', methods=['POST', 'GET'])
@@ -279,6 +359,7 @@ def cart():
 
 @app.route('/pay', methods=['POST', 'GET'])
 def pay():
+    # если нет адреса не давать купить
     return ''
 
 

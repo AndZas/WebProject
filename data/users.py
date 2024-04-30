@@ -4,6 +4,24 @@ from flask_login import UserMixin
 from .db_session import SqlAlchemyBase
 
 
+class AddProduct():
+    __tablename__ = 'menu_products'
+
+    id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, autoincrement=True)
+    name = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    price = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    work_time = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+
+
+class Address(SqlAlchemyBase, UserMixin):
+    __tablename__ = 'address'
+
+    id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, autoincrement=True)
+    name = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    desc = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    work_time = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+
+
 class Product(SqlAlchemyBase, UserMixin):
     __tablename__ = 'products'
 
