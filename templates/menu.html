@@ -26,308 +26,93 @@
 </script>
 {% endblock %}
 {% block main_info %}
-<form class="myForm" method="post">
-    <div class="tableContainer" style="margin-left: 4vh">
+<form class="myForm" method="post" enctype="multipart/form-data">
+    <div class="tableContainer" style="margin-left: 4vh;">
+        {% if flag %}
+        <div class="tableRow">
+            {{ form.hidden_tag() }}
+            <div class="form-row">
+                <div class="col">{{ form.name(class="form-control", type="text", placeholder="Name") }}</div>
+                <div class="col">{{ form.price(class="form-control", type="text", placeholder="Price") }}</div>
+                <div class="col">{{ form.desc(class="form-control", type="text", placeholder="Description",
+                    style="height: 38px;") }}
+                </div>
+                <div class="col">{{ form.group(class="form-control") }}</div>
+                <div class="col">
+                    <div class="col">{{ form.file(type="file", class="custom-file-input", id="inputGroupFile01") }}
+                    </div>
+                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                </div>
+
+                <div class="col">
+                    <button type="submit" class="btn btn-primary" name="add_product" value="add_product">
+                        Add product
+                    </button>
+                </div>
+            </div>
+        </div>
+        {% endif %}
         <div class="tableRow">
             <div style="width: 140vh">
                 <h1 style="font-size: 4vh; margin-top: 1vh">MENU</h1>
                 <h2 style="font-size: 2.5vh; margin-top: 1vh">Drinks</h2>
                 <hr>
             </div>
-            <div>
-                <div class="menu_card_item">
-                    <div class="first_a_menu_item">
-                        <div class="test2">
-                            {% if current_user.is_authenticated %}
-                            <button type="submit" name="espresso" value="espresso"
-                                    style="border: 0; background-color: white; margin: 0; padding: 0">
-                                <img alt="" class="product_animation" src="../static/images/Default_Espresso_0.jpg">
-                                <p class="red_string_for_menu">{{prices[0]}}$</p>
-                            </button>
-                            {% else %}
-                            <img onclick="f()" alt="" class="product_animation"
-                                 src="../static/images/Default_Espresso_0.jpg">
-                            {% endif %}
-                        </div>
-                        <div>
-                            <h1 class="h1_1">Espresso</h1>
-                            <h1 class="h1_2">Strong black coffee, which is prepared in a coffee machine. Espresso has a
-                                pleasant aroma and a long aftertaste.</h1>
-                        </div>
+            {% for item in drinks %}
+            <div class="menu_card_item">
+                {% for i in item %}
+                <div class="first_a_menu_item" style="margin-right: 10vh;">
+                    <div class="test2">
+                        {% if current_user.is_authenticated %}
+                        <button type="submit" name="{{ i.name }}" value="{{ i.name }}"
+                                style="border: 0; background-color: white; margin: 0; padding: 0">
+                            <img alt="" class="product_animation" src="{{ i.file }}">
+                            <p class="red_string_for_menu">{{ i.price }}$</p>
+                        </button>
+                        {% else %}
+                        <img onclick="f()" alt="" class="product_animation"
+                             src="{{ i.file }}">
+                        {% endif %}
                     </div>
-                    <div class="second_a_menu_item">
-                        <div class="test2">
-                            {% if current_user.is_authenticated %}
-                            <button type="submit" name="cappuccino" value="cappuccino"
-                                    style="border: 0; background-color: white; margin: 0; padding: 0">
-                                <img alt="" class="product_animation" src="../static/images/капучино.png">
-                                <p class="red_string_for_menu">{{prices[1]}}$</p>
-                            </button>
-                            {% else %}
-                            <img onclick="f()" alt="" class="product_animation"
-                                 src="../static/images/капучино.png">
-                            {% endif %}
-                        </div>
-                        <div>
-                            <h1 class="h1_1">Cappuccino</h1>
-                            <h1 class="h1_2">An Italian coffee drink made on the basis of espresso with the addition of
-                                foamed milk heated to 65 degrees.</h1>
-                        </div>
+                    <div>
+                        <h1 class="h1_1">{{ i.name }}</h1>
+                        <h1 class="h1_2">{{ i.desc }}</h1>
                     </div>
                 </div>
-                <div class="menu_card_item">
-                    <div class="first_a_menu_item">
-                        <div class="test2">
-                            {% if current_user.is_authenticated %}
-                            <button type="submit" name="frappuccino" value="frappuccino"
-                                    style="border: 0; background-color: white; margin: 0; padding: 0">
-                                <img alt="" class="product_animation" src="../static/images/Default_Frappuccino_1.jpg">
-                                <p class="red_string_for_menu">{{prices[2]}}$</p>
-                            </button>
-                            {% else %}
-                            <img onclick="f()" alt="" class="product_animation"
-                                 src="../static/images/Default_Frappuccino_1.jpg">
-                            {% endif %}
-                        </div>
-                        <div>
-                            <h1 class="h1_1">Frappuccino</h1>
-                            <h1 class="h1_2">This drink consists of a mixture of cold milk, strong coffee, sugar and
-                                chocolate syrup.</h1>
-                        </div>
-                    </div>
-                    <div class="second_a_menu_item">
-                        <div class="test2">
-                            {% if current_user.is_authenticated %}
-                            <button type="submit" name="hot_chocolate" value="hot_chocolate"
-                                    style="border: 0; background-color: white; margin: 0; padding: 0">
-                                <img alt="" class="product_animation" src="../static/images/Default_Hot_chocolate_1.jpg">
-                                <p class="red_string_for_menu">{{prices[3]}}$</p>
-                            </button>
-                            {% else %}
-                            <img onclick="f()" alt="" class="product_animation"
-                                 src="../static/images/Default_Hot_chocolate_1.jpg">
-                            {% endif %}
-                        </div>
-                        <div>
-                            <h1 class="h1_1">Hot chocolate</h1>
-                            <h1 class="h1_2">A warming and delicious drink made from cocoa powder, milk and various
-                                additives such as spices, vanilla or marshmallows.</h1>
-                        </div>
-                    </div>
-                </div>
-                <div class="menu_card_item">
-                    <div class="first_a_menu_item">
-                        <div class="test2">
-                            {% if current_user.is_authenticated %}
-                            <button type="submit" name="irish_coffee" value="irish_coffee"
-                                    style="border: 0; background-color: white; margin: 0; padding: 0">
-                                <img alt="" class="product_animation" src="../static/images/Default_Irish_coffee_0.jpg">
-                                <p class="red_string_for_menu">{{prices[4]}}$</p>
-                            </button>
-                            {% else %}
-                            <img onclick="f()" alt="" class="product_animation"
-                                 src="../static/images/Default_Irish_coffee_0.jpg">
-                            {% endif %}
-                        </div>
-                        <div>
-                            <h1 class="h1_1">Irish coffee</h1>
-                            <h1 class="h1_2">Hot alcoholic cocktail consisting of coffee, Irish whiskey, whipped cream
-                                and
-                                sugar. The cocktail has a creamy coffee flavor.</h1>
-                        </div>
-                    </div>
-                    <div class="second_a_menu_item">
-                        <div class="test2">
-                            {% if current_user.is_authenticated %}
-                            <button type="submit" name="vanilla_latte" value="vanilla_latte"
-                                    style="border: 0; background-color: white; margin: 0; padding: 0">
-                                <img alt="" class="product_animation" src="../static/images/Default_Vanilla_latte_1.jpg">
-                                <p class="red_string_for_menu">{{prices[5]}}$</p>
-                            </button>
-                            {% else %}
-                            <img onclick="f()" alt="" class="product_animation"
-                                 src="../static/images/Default_Vanilla_latte_1.jpg">
-                            {% endif %}
-                        </div>
-                        <div>
-                            <h1 class="h1_1">Vanilla latte</h1>
-                            <h1 class="h1_2">A delicious and flavorful drink that consists of espresso, milk and vanilla
-                                syrup. It has a delicate creamy taste.</h1>
-                        </div>
-                    </div>
-                </div>
-                <div class="menu_card_item">
-                    <div class="first_a_menu_item">
-                        <div class="test2">
-                            {% if current_user.is_authenticated %}
-                            <button type="submit" name="vanilla_mocha" value="vanilla_mocha"
-                                    style="border: 0; background-color: white; margin: 0; padding: 0">
-                                <img alt="" class="product_animation" src="../static/images/Default_Vanilla_mocha_1.jpg">
-                                <p class="red_string_for_menu">{{prices[6]}}$</p>
-                            </button>
-                            {% else %}
-                            <img onclick="f()" alt="" class="product_animation"
-                                 src="../static/images/Default_Vanilla_mocha_1.jpg">
-                            {% endif %}
-                        </div>
-                        <div>
-                            <h1 class="h1_1">Vanilla mocha</h1>
-                            <h1 class="h1_2">Sweet, fragrant and very tasty. Vanilla mocha is usually served with
-                                whipped
-                                cream and garnished with cinnamon or star anise.</h1>
-                        </div>
-                    </div>
-                    <div class="second_a_menu_item">
-                        <div class="test2">
-                            {% if current_user.is_authenticated %}
-                            <button type="submit" name="caramel_mocha" value="caramel_mocha"
-                                    style="border: 0; background-color: white; margin: 0; padding: 0">
-                                <img alt="" class="product_animation" src="../static/images/Default_Caramel_mocha_1.jpg">
-                                <p class="red_string_for_menu">{{prices[7]}}$</p>
-                            </button>
-                            {% else %}
-                            <img onclick="f()" alt="" class="product_animation"
-                                 src="../static/images/Default_Caramel_mocha_1.jpg">
-                            {% endif %}
-                        </div>
-                        <div>
-                            <h1 class="h1_1">Caramel mocha</h1>
-                            <h1 class="h1_2">Exquisite coffee drink that combines the rich aroma of strong espresso, the
-                                soft sweetness of caramel and gentle warm milk.</h1>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
-            <div style="margin-top: 70px">
-                <h2 style="font-size: 2.5vh">Food</h2>
-                <hr>
-            </div>
-            <div>
-                <div class="menu_card_item">
-                    <div class="first_a_menu_item">
-                        <div class="test2">
-                            {% if current_user.is_authenticated %}
-                            <button type="submit" name="cheesecake" value="cheesecake"
-                                    style="border: 0; background-color: white; margin: 0; padding: 0">
-                                <img alt="" class="product_animation" src="../static/images/Default_Cheesecake_0.jpg">
-                                <p class="red_string_for_menu">{{prices[8]}}$</p>
-                            </button>
-                            {% else %}
-                            <img onclick="f()" alt="" class="product_animation"
-                                 src="../static/images/Default_Cheesecake_0.jpg">
-                            {% endif %}
-                        </div>
-                        <div>
-                            <h1 class="h1_1">Cheesecake</h1>
-                            <h1 class="h1_2">A delicate and delicious dessert made from soft cream cheese, sugar, cream
-                                and
-                                eggs.</h1>
-                        </div>
-                    </div>
-                    <div class="second_a_menu_item">
-                        <div class="test2">
-                            {% if current_user.is_authenticated %}
-                            <button type="submit" name="croissant" value="croissant"
-                                    style="border: 0; background-color: white; margin: 0; padding: 0">
-                                <img alt="" class="product_animation" src="../static/images/Default_Croissant_0.jpg">
-                                <p class="red_string_for_menu">{{prices[9]}}$</p>
-                            </button>
-                            {% else %}
-                            <img onclick="f()" alt="" class="product_animation"
-                                 src="../static/images/Default_Croissant_0.jpg">
-                            {% endif %}
-                        </div>
-                        <div>
-                            <h1 class="h1_1">Croissant</h1>
-                            <h1 class="h1_2">A small flour pastry in the shape of a crescent made of puff pastry. It is
-                                a
-                                popular product of French cuisine.</h1>
-                        </div>
-                    </div>
-                </div>
-                <div class="menu_card_item">
-                    <div class="first_a_menu_item">
-                        <div class="test2">
-                            {% if current_user.is_authenticated %}
-                            <button type="submit" name="cookies" value="cookies"
-                                    style="border: 0; background-color: white; margin: 0; padding: 0">
-                                <img alt="" class="product_animation" src="../static/images/Default_Cookie_1.jpg">
-                                <p class="red_string_for_menu">{{prices[10]}}$</p>
-                            </button>
-                            {% else %}
-                            <img onclick="f()" alt="" class="product_animation"
-                                 src="../static/images/Default_Cookie_1.jpg">
-                            {% endif %}
-                        </div>
-                        <div>
-                            <h1 class="h1_1">Cookies</h1>
-                            <h1 class="h1_2">A pastry made from dough. It can be of different shapes and sizes, with or
-                                without filling.</h1>
-                        </div>
-                    </div>
-                    <div class="second_a_menu_item">
-                        <div class="test2">
-                            {% if current_user.is_authenticated %}
-                            <button type="submit" name="muffin" value="muffin"
-                                    style="border: 0; background-color: white; margin: 0; padding: 0">
-                                <img alt="" class="product_animation" src="../static/images/Default_Muffin_0.jpg">
-                                <p class="red_string_for_menu">{{prices[11]}}$</p>
-                            </button>
-                            {% else %}
-                            <img onclick="f()" alt="" class="product_animation"
-                                 src="../static/images/Default_Muffin_0.jpg">
-                            {% endif %}
-                        </div>
-                        <div>
-                            <h1 class="h1_1">Muffin</h1>
-                            <h1 class="h1_2">Small round or oval pastries, mostly sweet. The composition of the muffin
-                                includes a variety of fillings.</h1>
-                        </div>
-                    </div>
-                </div>
-                <div class="menu_card_item" style="margin-bottom: 100px">
-                    <div class="first_a_menu_item">
-                        <div class="test2">
-                            {% if current_user.is_authenticated %}
-                            <button type="submit" name="sandwich" value="sandwich"
-                                    style="border: 0; background-color: white; margin: 0; padding: 0">
-                                <img alt="" class="product_animation" src="../static/images/Default_sandwich_0.jpg">
-                                <p class="red_string_for_menu">{{prices[12]}}$</p>
-                            </button>
-                            {% else %}
-                            <img onclick="f()" alt="" class="product_animation"
-                                 src="../static/images/Default_sandwich_0.jpg">
-                            {% endif %}
-                        </div>
-                        <div>
-                            <h1 class="h1_1">Sandwich</h1>
-                            <h1 class="h1_2">A sandwich is a type of food that consists of two slices of bread with some
-                                filling in between.</h1>
-                        </div>
-                    </div>
-                    <div class="second_a_menu_item">
-                        <div class="test2">
-                            {% if current_user.is_authenticated %}
-                            <button type="submit" name="sandwich" value="sandwich"
-                                    style="border: 0; background-color: white; margin: 0; padding: 0">
-                                <img alt="" class="product_animation" src="../static/images/Default_Tiramisu_1.jpg">
-                                <p class="red_string_for_menu">{{prices[13]}}$</p>
-                            </button>
-                            {% else %}
-                            <img onclick="f()" alt="" class="product_animation"
-                                 src="../static/images/Default_Tiramisu_1.jpg">
-                            {% endif %}
-                        </div>
-                        <div>
-                            <h1 class="h1_1">Tiramisu</h1>
-                            <h1 class="h1_2">Italian multi-layered dessert consisting of mascarpone cheese, coffee,
-                                chicken
-                                eggs, sugar and savoyardi biscuits.</h1>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
+
         </div>
+        <div style="margin-top: 70px">
+            <h2 style="font-size: 2.5vh">Food</h2>
+            <hr>
+        </div>
+        {% for item in food %}
+        <div class="menu_card_item">
+            {% for i in item %}
+            <div class="first_a_menu_item" style="margin-right: 10vh;">
+                <div class="test2">
+                    {% if current_user.is_authenticated %}
+                    <button type="submit" name="{{ i.name }}" value="{{ i.name }}"
+                            style="border: 0; background-color: white; margin: 0; padding: 0">
+                        <img alt="" class="product_animation" src="{{ i.file }}">
+                        <p class="red_string_for_menu">{{ i.price }}$</p>
+                    </button>
+                    {% else %}
+                    <img onclick="f()" alt="" class="product_animation"
+                         src="{{ i.file }}">
+                    {% endif %}
+                </div>
+                <div>
+                    <h1 class="h1_1">{{ i.name }}</h1>
+                    <h1 class="h1_2">{{ i.desc }}</h1>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
     </div>
+
 </form>
 {% endblock %}

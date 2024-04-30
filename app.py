@@ -1,9 +1,11 @@
 import json
 import os
+import pprint
+
 from flask import url_for
 from flask import Flask, redirect, request
 from data import db_session
-from data.users import User, Product, Address
+from data.users import User, Product, Address, AddProduct
 from flask import render_template
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from data.login_form import LoginForm
@@ -11,30 +13,14 @@ from data.user import RegisterForm
 from werkzeug.utils import secure_filename
 from data.edit_profile import EditProfileForm
 from data.address_form import AddressForm
+from data.add_product_form import AddProductForm
 import requests
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
-app.config['UPLOADED_IMAGES_DEST'] = 'static/avatars'
+
 login_manager = LoginManager()
 login_manager.init_app(app)
-
-products_dct = {
-    'espresso': [3.1, '../static/images/Default_Espresso_0.jpg'],
-    'cappuccino': [3.1, '../static/images/капучино.png'],
-    'frappuccino': [3.1, '../static/images/Default_Frappuccino_1.jpg'],
-    'hot_chocolate': [3, '../static/images/Default_Hot_chocolate_1.jpg'],
-    'irish_coffee': [3.1, '../static/images/Default_Irish_coffee_0.jpg'],
-    'vanilla_latte': [3, '../static/images/Default_Vanilla_latte_1.jpg'],
-    'vanilla_mocha': [3, '../static/images/Default_Vanilla_mocha_1.jpg'],
-    'caramel_mocha': [3, '../static/images/Default_Caramel_mocha_1.jpg'],
-    'cheesecake': [2.5, '../static/images/Default_Cheesecake_0.jpg'],
-    'croissant': [1.5, '../static/images/Default_Croissant_0.jpg'],
-    'muffin': [2, '../static/images/Default_Muffin_0.jpg'],
-    'tiramisu': [5, '../static/images/Default_Tiramisu_1.jpg'],
-    'sandwich': [2, '../static/images/Default_sandwich_0.jpg'],
-    'cookies': [1.5, '../static/images/Default_Cookie_1.jpg'],
-}
 
 
 def get_name_by_id(user_id):
@@ -117,6 +103,7 @@ def my_profile():
         if form.validate_on_submit():
             try:
                 file = form.file.data
+                print(file)
                 frm = file.mimetype.split('/')[-1]
                 name_fl = file.filename.split(frm)[0][0:-1:1]
                 user = db_sess.query(User).filter(User.id == str(current_user)).first()
@@ -248,7 +235,7 @@ def get_map():
     getImage(lst)
 
 
-@app.route('/address', methods=['GET', 'POST'])
+@app.route('/address', methods=['POST', 'GET'])
 def address_page():
     get_map()
     form = AddressForm()
@@ -265,10 +252,9 @@ def address_page():
         db_sess.commit()
         db_sess.close()
         get_map()
-        redirect(url_for('address_page'))
+        return redirect('/address')
 
     user = get_email_by_id(current_user)
-
     flag = False
     if user == 'admin@gmail.com':
         flag = True
@@ -301,29 +287,90 @@ def about_coffee_page():
                            active_page='about_coffee')
 
 
-@app.route('/menu', methods=['POST', 'GET'])
+def get_all_products_by_group(group):
+    db_sess = db_session.create_session()
+    res = db_sess.query(AddProduct).filter(AddProduct.group == str(group)).all()
+    print(res)
+    if res:
+        return res
+    return ''
+
+
+def get_product_by_name(name):
+    db_sess = db_session.create_session()
+    res = db_sess.query(AddProduct).filter(AddProduct.name == str(name)).first()
+    if res:
+        return res
+    return ''
+
+
+@app.route('/menu', methods=['GET', 'POST'])
 def blog_page():
+    form = AddProductForm()
     if request.method == 'POST':
-        name = list(request.values.items())[0][0]
-        info_product = products_dct[name]
-        db_sess = db_session.create_session()
+        name = list(request.values.items())[-1][0]
+        if name == 'add_product':
+            try:
+                db_sess = db_session.create_session()
+                add_product = AddProduct()
 
-        product = Product()
+                add_product.name = form.name.data
+                add_product.price = form.price.data
+                add_product.desc = form.desc.data
+                add_product.group = form.group.data
 
-        product.user_id = str(current_user)
-        product.name = name
-        product.price = info_product[0]
-        product.image_src = info_product[1]
+                file = form.file.data
 
-        db_sess.add(product)
-        db_sess.commit()
+                src = f'static/images/{file.filename}'
+                file.save(src)
+
+                add_product.file = src
+
+                db_sess.add(add_product)
+                db_sess.commit()
+                db_sess.close()
+            except Exception as ex:
+                print(ex)
+                redirect('/menu')
+        else:
+            info_product = get_product_by_name(name)
+            db_sess = db_session.create_session()
+            # print(info_product)
+            product = Product()
+
+            product.user_id = str(current_user)
+            product.name = name
+            product.price = info_product.price
+            product.image_src = info_product.file
+
+            db_sess.add(product)
+            db_sess.commit()
+
         return redirect('/menu')
-    prices = [i[0] for i in products_dct.values()]
+
+    drinks = some_func('Drinks')
+    food = some_func('Food')
+    flag = True if get_email_by_id(current_user) == 'admin@gmail.com' else False
+
     return render_template('menu.html',
                            username=get_name_by_id(current_user),
                            filename=get_src_by_id(current_user),
                            products=len(get_product_by_id(current_user)),
-                           active_page='menu', prices=prices)
+                           active_page='menu', drinks=drinks, food=food, form=form, flag=flag)
+
+
+def some_func(group):
+    items = []
+    item = []
+    lst = get_all_products_by_group(group)
+    for i in range(len(lst)):
+        item.append(lst[i])
+        if i % 2 == 1 and i != 0:
+            items.append(item)
+            item = []
+    if item:
+        items.append(item)
+    return items
 
 
 @app.route('/recipes')
@@ -364,6 +411,7 @@ def cart():
         redirect('/cart')
 
     info = get_product_by_id(current_user)
+    print(info)
     info2 = get_product_no_repeat(info)
     result = 0
     for k, v in info2.items():
@@ -372,7 +420,7 @@ def cart():
                            username=get_name_by_id(current_user),
                            filename=get_src_by_id(current_user), products_list=info2,
                            products=len(info),
-                           result=result)
+                           result=round(result, 2))
 
 
 @app.route('/pay', methods=['POST', 'GET'])

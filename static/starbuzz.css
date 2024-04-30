@@ -222,6 +222,7 @@ div.tableContainer {
     margin-right: auto;
     display: table;
     border-spacing: 10px;
+    margin-bottom: 10vh;
 }
 
 div.tableRow {
@@ -423,8 +424,8 @@ div.test:hover p.red_string {
     padding-top: 15px;
     padding-left: 30px;
     position: relative;
-    width: 500px;
-    height: 500px;
+    width: 400px;
+    height: 400px;
 }
 
 .menu_card_item {
