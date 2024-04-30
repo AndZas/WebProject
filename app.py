@@ -2,7 +2,7 @@ import json
 import os
 
 import requests
-from flask import Flask, redirect, request
+from flask import Flask, redirect, request, abort
 from flask import render_template
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 
@@ -21,6 +21,7 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 
 
+# получение имени пользователя по id
 def get_name_by_id(user_id):
     db_sess = db_session.create_session()
     temp = db_sess.query(User).filter(User.id == str(user_id)).first()
@@ -30,6 +31,7 @@ def get_name_by_id(user_id):
     return ''
 
 
+# получение всех адресов
 def get_all_address():
     db_sess = db_session.create_session()
     temp = db_sess.query(Address).all()
@@ -39,6 +41,7 @@ def get_all_address():
     return ''
 
 
+# получение товаров и их количества
 def get_product_no_repeat(lst):
     dct = {}
     for i in lst:
@@ -53,6 +56,7 @@ def get_product_no_repeat(lst):
     return dct
 
 
+# получение товара по id
 def get_product_by_id(user_id):
     db_sess = db_session.create_session()
     try:
@@ -68,6 +72,7 @@ def get_product_by_id(user_id):
         return ''
 
 
+# получение аватарки пользователя по его id
 def get_src_by_id(user_id):
     db_sess = db_session.create_session()
     temp = db_sess.query(User).filter(User.id == str(user_id)).first()
@@ -77,6 +82,7 @@ def get_src_by_id(user_id):
     return ''
 
 
+# получение почты пользователя по его id
 def get_email_by_id(user_id):
     db_sess = db_session.create_session()
     user = db_sess.query(User).filter(User.id == str(user_id)).first()
@@ -86,6 +92,7 @@ def get_email_by_id(user_id):
     return ''
 
 
+# домашняя страница
 @app.route('/home')
 @app.route('/')
 def home_page():
@@ -93,6 +100,7 @@ def home_page():
                            products=len(get_product_by_id(current_user)))
 
 
+# страница редактирования профиля
 @app.route('/myprofile', methods=['GET', 'POST'])
 def my_profile():
     form = EditProfileForm()
@@ -139,12 +147,13 @@ def my_profile():
                                )
 
 
+# страница
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
         db_sess = db_session.create_session()
-        user = db_sess.query(User).filter(User.email == form.email.data).first()
+        user = db_sess.query(User).filter(User.email == str(form.email.data)).first()
         if user and user.check_password(form.password.data):
             login_user(user, remember=form.remember_me.data)
             return redirect("/")
@@ -154,6 +163,7 @@ def login():
     return render_template('login.html', title='Авторизация', form=form)
 
 
+# страница регистрации
 @app.route('/register', methods=['GET', 'POST'])
 def reqister():
     form = RegisterForm()
@@ -164,7 +174,7 @@ def reqister():
                                    form=form,
                                    message="Пароли не совпадают")
         db_sess = db_session.create_session()
-        if db_sess.query(User).filter(User.email == form.email.data).first():
+        if db_sess.query(User).filter(User.email == str(form.email.data)).first():
             return render_template('register.html',
                                    title='Регистрация',
                                    form=form,
@@ -186,6 +196,7 @@ def reqister():
     return render_template('register.html', title='Регистрация', form=form)
 
 
+# выход пользователя из аккаунта
 @app.route('/logout')
 @login_required
 def logout():
@@ -199,8 +210,10 @@ def load_user(user_id):
     return db_sess.query(User).get(user_id)
 
 
+# получение координат пользователя
 def get_coord(st):
-    geocoder_request = f"http://geocode-maps.yandex.ru/1.x/?apikey=40d1649f-0493-4b70-98ba-98533de7710b&geocode={st}&format=json"
+    geocoder_request = (f"http://geocode-maps.yandex.ru/1.x/?apikey=40d1649f-0493-4b70-98ba-98533de7710b&geocode={st}"
+                        f"&format=json")
 
     response = requests.get(geocoder_request).json()
     longitude, lattitude = response["response"]["GeoObjectCollection"]["featureMember"][0]['GeoObject']["Point"][
@@ -208,8 +221,10 @@ def get_coord(st):
     return float(longitude), float(lattitude)
 
 
-def getImage(coords):
-    map_request = f"http://static-maps.yandex.ru/1.x/?lang=ru_RU&ll=30.258814,59.908805&size=500,450&z=10&apikey=1a414c4d-1ca3-4d7a-accf-39ce347917f8&l=map"
+# получение изображения карты
+def get_image(coords):
+    map_request = (f"http://static-maps.yandex.ru/1.x/?lang=ru_RU&ll=30.258814,59.908805&size=500,450&z=10&apikey=1a414"
+                   f"c4d-1ca3-4d7a-accf-39ce347917f8&l=map")
     if coords:
         res = '&pt='
         for i in coords:
@@ -231,9 +246,10 @@ def get_map():
     lst = []
     for i in cords:
         lst.append(get_coord(i.desc))
-    getImage(lst)
+    get_image(lst)
 
 
+# страница с адресами
 @app.route('/address', methods=['POST', 'GET'])
 def address_page():
     get_map()
@@ -268,6 +284,7 @@ def address_page():
                            form=form)
 
 
+# страница о нас
 @app.route('/about_us')
 def about_us_page():
     return render_template('about_us.html',
@@ -277,6 +294,7 @@ def about_us_page():
                            active_page='about_us')
 
 
+# страница о кофе
 @app.route('/about_coffee')
 def about_coffee_page():
     return render_template('about_coffee.html',
@@ -286,6 +304,7 @@ def about_coffee_page():
                            active_page='about_coffee')
 
 
+# получение всех продуктов из группы group
 def get_all_products_by_group(group):
     db_sess = db_session.create_session()
     res = db_sess.query(AddProduct).filter(AddProduct.group == str(group)).all()
@@ -295,6 +314,7 @@ def get_all_products_by_group(group):
     return ''
 
 
+# получение продукта по названию
 def get_product_by_name(name):
     db_sess = db_session.create_session()
     res = db_sess.query(AddProduct).filter(AddProduct.name == str(name)).first()
@@ -303,8 +323,9 @@ def get_product_by_name(name):
     return ''
 
 
+# меню
 @app.route('/menu', methods=['GET', 'POST'])
-def blog_page():
+def menu_page():
     form = AddProductForm()
     if request.method == 'POST':
         name = list(request.values.items())[-1][0]
@@ -358,6 +379,7 @@ def blog_page():
                            active_page='menu', drinks=drinks, food=food, form=form, flag=flag)
 
 
+# разбивает список товаров по два в ряд
 def some_func(group):
     items = []
     item = []
@@ -372,6 +394,7 @@ def some_func(group):
     return items
 
 
+# страница всех рецептов
 @app.route('/recipes')
 def recipes_page():
     with open('static/coffe.json') as file:
@@ -385,6 +408,7 @@ def recipes_page():
                            active_page='recipes')
 
 
+# страница рецепта определенного кофе
 @app.route('/recipes/<coffee_type>')
 def coffee_page(coffee_type):
     if coffee_type in ['espresso', 'americano', 'cappuccino',
@@ -397,6 +421,7 @@ def coffee_page(coffee_type):
         abort(404)
 
 
+# страница корзины
 @app.route('/cart', methods=['POST', 'GET'])
 def cart():
     if request.method == 'POST':
@@ -422,12 +447,14 @@ def cart():
                            result=round(result, 2))
 
 
+# страница оплаты
 @app.route('/pay', methods=['POST', 'GET'])
 def pay():
     # если нет адреса не давать купить
     return ''
 
 
+# основная функция
 def main():
     db_session.global_init('db/users_data_base.db')
     port = int(os.environ.get('PORT', 5000))
