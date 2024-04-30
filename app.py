@@ -283,6 +283,24 @@ def address_page():
                            form=form)
 
 
+@app.route('/about_us')
+def about_us_page():
+    return render_template('about_us.html',
+                           username=get_name_by_id(current_user),
+                           filename=get_src_by_id(current_user),
+                           products=len(get_product_by_id(current_user)),
+                           active_page='about_us')
+
+
+@app.route('/about_coffee')
+def about_coffee_page():
+    return render_template('about_coffee.html',
+                           username=get_name_by_id(current_user),
+                           filename=get_src_by_id(current_user),
+                           products=len(get_product_by_id(current_user)),
+                           active_page='about_coffee')
+
+
 @app.route('/menu', methods=['POST', 'GET'])
 def blog_page():
     if request.method == 'POST':
