@@ -18,6 +18,7 @@ app.config['UPLOADED_IMAGES_DEST'] = 'static/avatars'
 login_manager = LoginManager()
 login_manager.init_app(app)
 
+# информация о продуктах
 products_dct = {
     'espresso': [3.1, '../static/images/Default_Espresso_0.jpg'],
     'cappuccino': [3.1, '../static/images/капучино.png'],
@@ -36,6 +37,7 @@ products_dct = {
 }
 
 
+# возвращает имя пользователя по id
 def get_name_by_id(user_id):
     db_sess = db_session.create_session()
     temp = db_sess.query(User).filter(User.id == str(user_id)).first()
@@ -45,6 +47,7 @@ def get_name_by_id(user_id):
     return ''
 
 
+# return set of products with out repeat
 def get_product_no_repeat(lst):
     dct = {}
     for i in lst:
@@ -58,6 +61,7 @@ def get_product_no_repeat(lst):
     return dct
 
 
+# return product by product id
 def get_product_by_id(user_id):
     db_sess = db_session.create_session()
     try:
@@ -73,6 +77,7 @@ def get_product_by_id(user_id):
         return ''
 
 
+# возвращает аватарку пользователя
 def get_src_by_id(user_id):
     db_sess = db_session.create_session()
     temp = db_sess.query(User).filter(User.id == str(user_id)).first()
@@ -82,6 +87,7 @@ def get_src_by_id(user_id):
     return ''
 
 
+# домашняя страница
 @app.route('/home')
 @app.route('/')
 def home_page():
@@ -89,6 +95,7 @@ def home_page():
                            products=len(get_product_by_id(current_user)))
 
 
+# настройки профиля
 @app.route('/myprofile', methods=['GET', 'POST'])
 def my_profile():
     form = EditProfileForm()
@@ -134,6 +141,7 @@ def my_profile():
                                )
 
 
+# авторизация
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
@@ -149,6 +157,7 @@ def login():
     return render_template('login.html', title='Авторизация', form=form)
 
 
+# регистрация
 @app.route('/register', methods=['GET', 'POST'])
 def reqister():
     form = RegisterForm()
@@ -181,6 +190,7 @@ def reqister():
     return render_template('register.html', title='Регистрация', form=form)
 
 
+# выход из аккаунта
 @app.route('/logout')
 @login_required
 def logout():
@@ -188,12 +198,14 @@ def logout():
     return redirect('/')
 
 
+# возвращает пользователя
 @login_manager.user_loader
 def load_user(user_id):
     db_sess = db_session.create_session()
     return db_sess.query(User).get(user_id)
 
 
+# адреса магазинов
 @app.route('/address')
 def address_page():
     return render_template('address.html',
@@ -203,6 +215,7 @@ def address_page():
                            active_page='find_a_store')
 
 
+# о нас
 @app.route('/about_us')
 def about_us_page():
     return render_template('about_us.html',
@@ -212,6 +225,7 @@ def about_us_page():
                            active_page='about_us')
 
 
+# о кофе
 @app.route('/about_coffee')
 def about_coffee_page():
     return render_template('about_coffee.html',
@@ -221,6 +235,7 @@ def about_coffee_page():
                            active_page='about_coffee')
 
 
+# меню
 @app.route('/menu', methods=['POST', 'GET'])
 def blog_page():
     if request.method == 'POST':
@@ -246,6 +261,7 @@ def blog_page():
                            active_page='menu', prices=prices)
 
 
+# все рецепты
 @app.route('/recipes')
 def recipes_page():
     with open('static/coffe.json') as file:
@@ -259,6 +275,7 @@ def recipes_page():
                            active_page='recipes')
 
 
+# рецепты определенного кофе
 @app.route('/recipes/<coffee_type>')
 def coffee_page(coffee_type):
     if coffee_type in ['espresso', 'americano', 'cappuccino',
@@ -271,6 +288,7 @@ def coffee_page(coffee_type):
         abort(404)
 
 
+# корзина
 @app.route('/cart', methods=['POST', 'GET'])
 def cart():
     if request.method == 'POST':
@@ -295,11 +313,13 @@ def cart():
                            result=result)
 
 
+# оплата заказа
 @app.route('/pay', methods=['POST', 'GET'])
 def pay():
     return ''
 
 
+# основная функция
 def main():
     db_session.global_init('db/users_data_base.db')
     port = int(os.environ.get('PORT', 5000))
