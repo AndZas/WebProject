@@ -31,8 +31,8 @@ body {
 }
 
 .main_info {
-    line-height: 30px;
-    width: 1450px;
+    line-height: 3vh;
+    width: 145vh;
     margin-left: auto;
     margin-right: auto;
 }
@@ -318,7 +318,7 @@ div.test {
 div.test2 {
     display: inline-block;
     position: relative;
-    max-height: 120px;
+    max-height: 12vh;
 }
 
 a.drink {
@@ -424,44 +424,49 @@ div.test:hover p.red_string {
     padding-left: 30px;
     position: relative;
     width: 500px;
-    height: 450px;
+    height: 500px;
 }
 
 .menu_card_item {
     display: flex;
     flex-direction: row;
-    margin-top: 30px
+    margin-top: 3vh
 }
 
 .first_a_menu_item {
     display: flex;
     flex-direction: row;
-    min-width: 200px;
-    width: 650px;
+    width: 65vh
 }
 
 .first_a_menu_item img {
-    border-radius: 60px;
-    width: 120px;
-    height: 120px
+    border-radius: 6vh;
+    width: 12vh;
+    height: 12vh
 }
 
 div .h1_1 {
-    font-size: 25px;
-    margin-left: 20px;
-    margin-top: 5px
+    font-size: 2.5vh;
+    margin-left: 2vh;
+    margin-top: 0.5vh
 }
 
 div .h1_2 {
-    font-size: 15px;
-    margin-left: 20px
+    font-size: 1.5vh;
+    margin-left: 2vh
 }
 
 .second_a_menu_item {
     display: flex;
     flex-direction: row;
-    width: 650px;
-    margin-left: 100px
+    width: 65vh;
+    margin-left: 10vh
+}
+
+.second_a_menu_item img {
+    border-radius: 6vh;
+    width: 12vh;
+    height: 12vh
 }
 
 .red_string_for_menu {
@@ -470,13 +475,13 @@ div .h1_2 {
     top: 0;
     left: 0;
     width: 100%;
-    height: 120px;
+    height: 12vh;
     background-color: rgba(0, 0, 0, .5);
     color: #fff;
-    border-radius: 100px;
-    padding: 48px 0 0;
+    border-radius: 10vh;
+    padding: 4.8vh 0 0;
     text-align: center;
-    font-size: 18px;
+    font-size: 1.8vh;
     opacity: 0;
     /*transform: scale(0);*/
     -webkit-transition: all .45s;
