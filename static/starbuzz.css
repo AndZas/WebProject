@@ -11,23 +11,23 @@
 body {
     background-color: white;
     font-family: MyCustomFont, Arial, sans-serif;
-    font-size: 14px;
+    font-size: 1.4vh;
 }
 
 .avatar img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50px;
+    width: 5vh;
+    height: 5vh;
+    border-radius: 5vh;
 }
 
 .avatar {
-    padding-right: 10px;
+    padding-right: 1vh;
     position: relative;
 }
 
 .margin_left_auto {
     margin-left: auto;
-    margin-right: 25px;
+    margin-right: 2.5vh;
 }
 
 .main_info {
@@ -53,6 +53,7 @@ h2 {
 .LOGO {
     /*z-index: 0;*/
     transition: .5s;
+    width: 10vh;
 }
 
 .LOGO:hover {
@@ -60,43 +61,43 @@ h2 {
 }
 
 .cont_info_user_profile {
-    width: 410px;
+    width: 41vh;
 }
 
 .test123 {
-    margin-top: 4px;
-    width: 400px;
+    margin-top: 0.4vh;
+    width: 40vh;
     display: flex;
     justify-content: space-between;
     /*float: right;*/
 }
 
 .test1234 {
-    margin-top: 4px;
-    width: 550px;
+    margin-top: 0.4vh;
+    width: 55vh;
     display: flex;
     justify-content: space-between;
     /*float: right;*/
 }
 
 .width_for_profile_inputs {
-    width: 400px;
+    width: 40vh;
 }
 
 .comment_class {
-    margin-top: 3.5px;
-    height: 152px;
-    width: 205px;
-    max-width: 205px;
-    max-height: 152px;
+    margin-top: 0.35vh;
+    height: 15.2vh;
+    width: 20.5vh;
+    max-width: 20.5vh;
+    max-height: 15.2vh;
     /*height: auto;*/
     float: right;
 }
 
 .address_class {
-    margin-left: 25px;
+    margin-left: 2.5vh;
     margin-right: auto;
-    width: 400px;
+    width: 40vh;
 }
 
 .main_cont {
@@ -107,15 +108,16 @@ h2 {
     justify-content: space-between;
     align-items: center;
     padding: 0 8%;
+    height: 10vh
 }
 
 .active {
-    box-shadow: inset 0 -6px #00754a;
+    box-shadow: inset 0 -0.6vh #00754a;
 }
 
 div.cont1 a {
     color: black;
-    padding: 5px 10px 5px 10px;
+    padding: 0.5vh 1vh 0.5vh 1vh;
 }
 
 .cont2 {
@@ -125,15 +127,15 @@ div.cont1 a {
 
 .cont2 a {
     width: 100%;
-    font-size: 15px;
-    padding: 5px 15px;
-    margin-left: 15px;
+    font-size: 1.5vh;
+    padding: 0.5vh 1.5vh;
+    margin-left: 1.5vh;
 }
 
 .sign_in {
     color: #212121;
-    border: 1px solid black;
-    border-radius: 15px;
+    border: 0.1vh solid black;
+    border-radius: 1.5vh;
 }
 
 .sign_in:hover {
@@ -143,9 +145,9 @@ div.cont1 a {
 
 .join_now {
     color: white;
-    border: 1px solid black;
+    border: 0.1vh solid black;
     background-color: black;
-    border-radius: 15px;
+    border-radius: 1.5vh;
 }
 
 .join_now:hover {
@@ -156,6 +158,7 @@ div.cont1 a {
 
 .username_class {
     color: black;
+    font-size: 1.5vh
 }
 
 .cont1 a:hover {
@@ -165,29 +168,29 @@ div.cont1 a {
 
 div.Row_info {
     background: white;
-    padding: 15px;
+    padding: 1.5vh;
     border-bottom: thin solid rgb(217, 217, 217);
 }
 
 div#info_geolocation {
     display: table-cell;
-    width: 1000px;
+    width: 100vh;
 }
 
 div#Order_coffee {
-    width: 1450px;
+    width: 145vh;
     margin-left: auto;
     margin-right: auto;
     display: table-cell;
     background: white;
     font-size: 105%;
-    padding: 15px;
+    padding: 1.5vh;
     text-align: center;
 }
 
 table#пропорции_для_кофе_таблица {
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 2vh;
+    margin-right: 2vh;
     border: thin solid black;
     border-collapse: collapse;
 }
@@ -196,7 +199,7 @@ section#main, section#blog {
     display: table-cell;
     background: white;
     font-size: 105%;
-    padding: 15px;
+    padding: 1.5vh;
     vertical-align: top;
 }
 
@@ -204,7 +207,7 @@ section#drinks {
     display: table-cell;
     background-color: white;
     width: 20%;
-    padding: 15px;
+    padding: 1.5vh;
     vertical-align: top;
 }
 
@@ -212,7 +215,7 @@ aside.right_column {
     display: table-cell;
     background: white;
     font-size: 105%;
-    padding: 15px;
+    padding: 1.5vh;
     vertical-align: top;
     width: 25%
 }
@@ -221,8 +224,7 @@ div.tableContainer {
     margin-left: auto;
     margin-right: auto;
     display: table;
-    border-spacing: 10px;
-    margin-bottom: 10vh;
+    border-spacing: 1vh;
 }
 
 div.tableRow {
@@ -232,7 +234,7 @@ div.tableRow {
 .section_рецепт_кофе {
     display: table-cell;
     background: white;
-    padding: 15px;
+    padding: 1.5vh;
     vertical-align: top;
 }
 
@@ -245,11 +247,11 @@ div.tableRow {
 
 .pos_photo_of_coffe {
     float: right;
-    padding-left: 15px;
+    padding-left: 1.5vh;
 }
 
 .table_propor {
-    padding-left: 38px;
+    padding-left: 3.8vh;
 }
 
 p#для_одной_чашки_тоже {
@@ -267,9 +269,9 @@ a#эспрессо_link_from_table {
 }
 
 a#do_order {
-    border: 1px solid black;
-    padding: 5px;
-    border-radius: 10px;
+    border: 0.1vh solid black;
+    padding: 0.5vh;
+    border-radius: 1vh;
     background-color: #e9c28b;
 }
 
@@ -293,7 +295,7 @@ table tr#первая_строка_таблицы {
 
 td, th {
     border: thin dotted gray;
-    padding: 5px;
+    padding: 0.5vh;
 }
 
 footer {
@@ -301,14 +303,14 @@ footer {
     background-color: white;
     color: black;
     text-align: center;
-    padding: 15px;
-    margin: 0 10px 10px 10px;
-    font-size: 14px;
+    padding: 1.5vh;
+    margin: 0 1vh 1vh 1vh;
+    font-size: 1.4vh;
 }
 
 header.top {
-    margin: 10px 10px 0 10px;
-    height: 91px;
+    margin: 1vh 1vh 0 1vh;
+    height: 9.1vh;
 }
 
 div.test {
@@ -327,7 +329,7 @@ a.drink {
     display: table-cell;
     background: white;
     /*padding: 15px;*/
-    padding: 15px;
+    padding: 1vh;
     text-align: center;
     vertical-align: top;
     width: 25%;
@@ -342,7 +344,7 @@ a.drink:hover {
 }
 
 .about_coffe {
-    width: 300px;
+    width: 30vh;
 }
 
 .red_string {
@@ -352,10 +354,10 @@ a.drink:hover {
     left: 0;
     /*width: 300px;*/
     width: 100%;
-    height: 200px;
+    height: 20vh;
     background-color: rgba(0, 0, 0, .5);
     color: #fff;
-    padding: 75px 0 0;
+    padding: 7.5vh 0 0;
     text-align: center;
     font-size: large;
     opacity: 0;
@@ -385,7 +387,7 @@ div.test:hover p.red_string {
 
 .menu li a {
     display: block;
-    padding: 10px;
+    padding: 1vh;
     text-decoration: none;
     color: #333;
 }
@@ -407,7 +409,7 @@ div.test:hover p.red_string {
 }
 
 .submenu li a {
-    width: 95px;
+    width: 9.5vh;
 }
 
 .menu li:hover .submenu {
@@ -421,11 +423,11 @@ div.test:hover p.red_string {
 }
 
 .map_class {
-    padding-top: 15px;
-    padding-left: 30px;
+    padding-top: 1.5vh;
+    padding-left: 3vh;
     position: relative;
-    width: 400px;
-    height: 400px;
+    width: 50vh;
+    height: 50vh;
 }
 
 .menu_card_item {
@@ -498,23 +500,23 @@ div.test2:hover p.red_string_for_menu:hover {
 
 .cart_product_card {
 
-    margin: 20px 0 20px 0;
-    border: 1px solid black;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
+    margin: 2vh 0 2vh 0;
+    border: 0.1vh solid black;
+    border-top-right-radius: 2vh;
+    border-bottom-right-radius: 2vh;
     display: flex;
     /*justify-content: space-between;*/
 }
 
 .cart_product_card img {
-    width: 120px;
-    height: 120px;
+    width: 12vh;
+    height: 12vh;
 }
 
 .product_animation {
-    width: 120px;
-    height: 120px;
-    border-radius: 100px;
+    width: 12vh;
+    height: 12vh;
+    border-radius: 10vh;
 }
 
 button:focus {

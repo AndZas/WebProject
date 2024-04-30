@@ -24,18 +24,18 @@
 <div style="border-bottom: 1px solid #e8e8e8;">
     <div style="width: auto; margin-left: auto; margin-right: auto;">
         <div class="main_cont">
-            <a class="LOGO" href="/"><img alt="логотип" src="../static/images/image_212.png"></a>
+            <a class="LOGO" href="/"><img alt="логотип" src="../static/images/image_212.png" width="100%" height="100%"></a>
             <div class="cont1">
-                <a href="/menu">MENU</a>
-                <a href="/recipes">RECIPES</a>
-                <a href="/address">Find a store</a>
+                <a href="/menu" style="font-size: 1.5vh">MENU</a>
+                <a href="/recipes" style="font-size: 1.5vh">RECIPES</a>
+                <a href="/address" style="font-size: 1.5vh">Find a store</a>
             </div>
             {% if current_user.is_authenticated %}
             <div class="margin_left_auto">
-                <a href="/cart">
-                    <img src="../static/images/market_green.png" width="25" height="25">
+                <a href="/cart" style="width: 80%; height: 80%">
+                    <img src="../static/images/market_green.png" width="22vh" height="22vh">
                 </a>
-                <span id="cartCount" style="position: absolute; top: 60px; color: #006241; font-size: 10px">{{ products }}</span>
+                <span id="cartCount" style="position: absolute; top: 6vh; color: #006241; font-size: 1.2vh">{{ products }}</span>
             </div>
             <div class="avatar">
                 <ul class="menu">
