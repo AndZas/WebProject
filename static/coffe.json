@@ -2,61 +2,61 @@
   "list1": [
     [
       "espresso",
-      "эспрессо",
-      "эспрессо.png",
-      "Погрузитесь в мир настоящего итальянского эспрессо, напитка, который сочетает в себе силу итальянского стиля с неповторимым ароматом и вкусом."
+      "espresso",
+      "espresso.png",
+      "Immerse yourself in the world of authentic Italian espresso, a drink that combines the power of Italian style with a unique aroma and taste."
     ],
     [
       "ristretto",
-      "ристретто",
-      "ристретто.jpg",
-      "Ристретто — это исключительное удовольствие для настоящих ценителей кофе. Он отличается насыщенным вкусом, глубоким ароматом и приятной горчинкой."
+      "ristretto",
+      "ristretto.jpg",
+      "Ristretto is an exceptional pleasure for true coffee lovers. It is distinguished by rich taste, deep aroma and pleasant bitterness."
     ],
     [
       "lungo",
-      "лунго",
-      "лунго.png",
-      "Лунго — это истинное удовольствие для ценителей кофе, которые ценят баланс между насыщенным вкусом и нежной текстурой."
+      "lungo",
+      "lungo.png",
+      "Lungo is a true pleasure for coffee lovers who appreciate the balance between rich taste and delicate texture."
     ],
     [
       "americano",
-      "американо",
-      "американо.png",
-      "Американо — это идеальное сочетание силы и нежности. Его богатый аромат и умеренная крепость делают его отличным выбором для тех, кто ценит настоящее наслаждение кофе без лишней горечи."
+      "americano",
+      "americano.png",
+      "Americano is the perfect combination of strength and tenderness. Its rich aroma and moderate fortress make it a great choice for you."
     ]
   ],
   "list2": [
     [
       "cappuccino",
-      "капучино",
-      "капучино.png",
-      "Капучино — это насыщенное сочетание свежести и утонченности, которое пробуждает ваши чувства и уносит в мир гармонии. Его бархатная пенка и нежный вкус обещают неповторимый опыт"
+      "cappuccino",
+      "cappuccino.png",
+      "Cappuccino is a rich combination of freshness and refinement that awakens your senses and carries you into the world of harmony."
     ],
     [
       "macchiato",
-      "макиато",
-      "макиато.png",
-      "Макиато — это искусное сочетание энергии и элегантности, которое придает яркость вашему дню и вдохновляет на великие свершения."
+      "macchiato",
+      "macchiato.png",
+      "Macchiato is a skillful blend of energy and elegance that brightens your day and inspires great achievements."
     ],
     [
       "latte",
-      "латте",
-      "латте.png",
-      "Латте — это настоящий заряд бодрости и утонченного наслаждения. Его нежный вкус и бархатистая текстура создают идеальное сочетание для тех, кто ценит моменты наслаждения и комфорта."
+      "latte",
+      "latte.png",
+      "Latte is a real charge and refined pleasure. Its delicate taste and velvety texture create the perfect combination for you"
     ],
     [
       "kon_panna",
-      "кон_панна",
-      "кон%20панна.png",
-      "Кон панна — это искусное сочетание кремовой нежности и неповторимого вкуса эспрессо. Его мягкий вкус и насыщенный аромат станут настоящим утешением для ценителей кофейного искусства."
+      "kon panna",
+      "kon_panna.png",
+      "Kon Panna is a great combination of creamy tenderness. Its soft taste and rich aroma will be a real consolation for connoisseurs of coffee art."
     ]
   ],
   "list3": [
     [
       "mocha",
-      "мокко",
-      "мокко.png",
-      "Мокко — это идеальное сочетание интенсивного вкуса эспрессо и нежной сладости шоколада. Его богатый вкус и аромат погрузят вас в атмосферу настоящего удовольствия."
+      "mocha",
+      "mocha.png",
+      "Mocha is the perfect combination of intense espresso flavor and delicate chocolate sweetness."
     ]
   ]
 }

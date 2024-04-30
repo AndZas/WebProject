@@ -6,8 +6,8 @@ from wtforms.validators import DataRequired
 class EditProfileForm(FlaskForm):
     name = StringField('Your name')
     surname = StringField('Your surname')
-    email = StringField('Email')
-    phone = StringField('Phone number')
+    email = StringField('Your email')
+    phone = StringField('Your phone')
     file = FileField('Image')
     street = StringField('Street')
     apartment = StringField('Apartment')

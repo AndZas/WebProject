@@ -75,7 +75,7 @@
                         {% endif %}
                     </div>
                     <div>
-                        <h1 class="h1_1">{{ i.name }}</h1>
+                        <h1 class="h1_1">{{ ' '.join(i.name.split('_')).capitalize() }}</h1>
                         <h1 class="h1_2">{{ i.desc }}</h1>
                     </div>
                 </div>
@@ -105,7 +105,7 @@
                     {% endif %}
                 </div>
                 <div>
-                    <h1 class="h1_1">{{ i.name }}</h1>
+                    <h1 class="h1_1">{{ ' '.join(i.name.split('_')).capitalize() }}</h1>
                     <h1 class="h1_2">{{ i.desc }}</h1>
                 </div>
             </div>

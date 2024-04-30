@@ -305,6 +305,7 @@ footer {
     text-align: center;
     padding: 1.5vh;
     margin: 0 1vh 1vh 1vh;
+    margin-top: 10vh;
     font-size: 1.4vh;
 }
 
@@ -359,7 +360,8 @@ a.drink:hover {
     color: #fff;
     padding: 7.5vh 0 0;
     text-align: center;
-    font-size: large;
+    /*font-size: large;*/
+    font-size: 2vh;
     opacity: 0;
     transform: scale(0);
     -webkit-transition: all .45s;

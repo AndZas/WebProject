@@ -1,20 +1,18 @@
 import json
 import os
-import pprint
 
-from flask import url_for
+import requests
 from flask import Flask, redirect, request
-from data import db_session
-from data.users import User, Product, Address, AddProduct
 from flask import render_template
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
+
+from data import db_session
+from data.add_product_form import AddProductForm
+from data.address_form import AddressForm
+from data.edit_profile import EditProfileForm
 from data.login_form import LoginForm
 from data.user import RegisterForm
-from werkzeug.utils import secure_filename
-from data.edit_profile import EditProfileForm
-from data.address_form import AddressForm
-from data.add_product_form import AddProductForm
-import requests
+from data.users import User, Product, Address, AddProduct
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
@@ -50,6 +48,7 @@ def get_product_no_repeat(lst):
             dct[i[2]][1].append(i[1])
             dct[i[2]][5] += 1
             dct[i[2]][6] += i[3]
+            dct[i[2]][6] = round(dct[i[2]][6], 5)
     dct = {k: v for k, v in sorted(dct.items(), key=lambda x: x[1][5])[::-1]}
     return dct
 
@@ -290,7 +289,7 @@ def about_coffee_page():
 def get_all_products_by_group(group):
     db_sess = db_session.create_session()
     res = db_sess.query(AddProduct).filter(AddProduct.group == str(group)).all()
-    print(res)
+
     if res:
         return res
     return ''

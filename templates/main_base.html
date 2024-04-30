@@ -33,7 +33,7 @@
             {% if current_user.is_authenticated %}
             <div class="margin_left_auto">
                 <a href="/cart" style="width: 80%; height: 80%">
-                    <img src="../static/images/market_green.png" width="22vh" height="22vh">
+                    <img src="../static/images/market_green.png" style="max-width: 2.5vh; max-height: 2.5vh">
                 </a>
                 <span id="cartCount" style="position: absolute; top: 6vh; color: #006241; font-size: 1.2vh">{{ products }}</span>
             </div>
@@ -61,7 +61,7 @@
 <div class="main_info">
     {% block main_info %}{% endblock %}
 </div>
-<footer>
+<footer >
     *Impossible is a trademark of Impossible Foods Inc. Used under license.
     <br><br>
     &copy; 2024, Кафе Starbuzz
